@@ -4,14 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomePage</title>
+  <title>User Profile</title>
 </head>
 
 <body>
-    <div class="home">
-      <a href="login.jsp"><button>Login</button></a>
-      <a href="about.jsp"><button>About</button></a>
-    </div>
+  
 </body>
 
 </html>

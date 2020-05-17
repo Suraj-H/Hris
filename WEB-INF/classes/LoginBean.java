@@ -4,6 +4,13 @@ public class LoginBean {
     private String username;
     private String password;
 
+    public LoginBean() { }
+
+    public LoginBean(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -16,7 +23,7 @@ public class LoginBean {
         return password;
     }
 
-    public void setPassword(String pass) {
-        this.password = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
