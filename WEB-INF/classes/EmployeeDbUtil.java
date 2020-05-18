@@ -7,9 +7,10 @@ import java.util.List;
 import bean.EmployeeBean;
 
 public class EmployeeDbUtil {
+    private List<EmployeeBean> employees;
 
     public List<EmployeeBean> getEmployees() throws Exception {
-        List<EmployeeBean> employees = new ArrayList<>();
+        employees = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -47,11 +48,9 @@ public class EmployeeDbUtil {
                 rs.close();
                 ps.close();
                 con.close();
-            } catch (Exception e) {
-                // TODO: handle exception
-            }
-
+            } catch (Exception e) { }
         }
+
         return employees;
     }
 
