@@ -8,15 +8,12 @@ public class ConnectionProvider {
     private static String USERNAME = "root";
     private static String PASSWORD = "surajh";
     private static Connection con = null;
-    
-    static {
+
+    public static Connection getConnection() {        
         try {
             Class.forName(DRIVER);
             con = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
-        } catch (Exception e) { }
-    }
-
-    public static Connection getConnection() {
+        } catch (Exception igonred) { }
         return con;
     }
 }

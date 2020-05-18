@@ -8,10 +8,11 @@
 </head>
 
 <body>
-    <div class="home">
-      <a href="login.jsp"><button>Login</button></a>
-      <a href="about.jsp"><button>About</button></a>
-    </div>
+  <div class="home">
+    <a href="login.jsp"><button>Login</button></a>
+    <a href="about.jsp"><button>About</button></a>
+  </div>
+
 </body>
 
 </html>

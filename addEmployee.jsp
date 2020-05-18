@@ -10,8 +10,11 @@
 
 <body>
   <div class="container">
-    <form action="" id="form" class="form">
+    <form action="/Hris/AddEmployeeServlet.java" method="POST" id="form" class="form">
       <h2>Add Employee</h2>
+      <div class="form-control">
+        <input type="text" name="employeeId" id="employeeId" placeholder="Enter employee id">
+      </div>
       <div class="form-control">
         <input type="text" name="fullName" id="fullName" placeholder="Enter full name">
       </div>

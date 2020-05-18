@@ -15,6 +15,24 @@ public class EmployeeBean {
     private int branchId;
     private int salary;
 
+    public EmployeeBean() { }
+
+    public EmployeeBean(int employeeId, String fullName, int age, String address, String dateOfBirth, int phoneNo, String emailId, String qualification, String postLevel, String joiningDate, int departmentId, int branchId, int salary) {
+        this.employeeId = employeeId;
+        this.fullName = fullName;
+        this.age = age;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.emailId = emailId;
+        this.qualification = qualification;
+        this.postLevel = postLevel;
+        this.joiningDate = joiningDate;
+        this.departmentId = departmentId;
+        this.branchId = branchId;
+        this.salary = salary;
+    }
+
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }

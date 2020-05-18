@@ -8,7 +8,28 @@
 </head>
 
 <body>
-  
+  <div class="container">
+    <div class="user">
+      <form action="/Hris/logout" method="GET">
+        <button type="submit" name="logout">Logout</button><br><br>
+      </form>
+
+      <a href="index.jsp"><button type="button">Home</button></a>
+      <a href="editInfo.jsp"><button type="button">Edit Info</button></a>
+      <a href="getInfo.jsp"><button type="button">Get Info</button></a>
+      <a href=""><button type="button">Employee List</button></a>
+      <a href="addEmployee.jsp"><button type="button">Add Employee</button></a>
+    </div>
+    <hr>
+  </div>
+
+  <%
+    if (session.getAttribute("loginBean") != null) {
+      out.println("session not null!");
+    } else {
+      out.println("session null!");
+    }
+  %>
 </body>
 
 </html>
