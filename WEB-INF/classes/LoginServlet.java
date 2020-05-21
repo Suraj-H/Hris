@@ -1,4 +1,4 @@
-package controller;
+package hris.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,24 +8,29 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import bean.LoginBean;
-import bean.LoginDao;
+import hris.bean.Employee;
+import hris.bean.EmployeeDbUtil;
+
 
 public class LoginServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-
-        if (loginBean == null) {
-            loginBean = new LoginBean(request.getParameter("username"), request.getParameter("password"));
-            session.setAttribute("loginBean", loginBean);
+        Employee employee = (Employee) session.getAttribute("employee");
+        
+        if (session.isNew()) {
+            employee = new Employee(request.getParameter("username"), request.getParameter("password"));
+            session.setAttribute("employee", employee);
         }
+        
+        EmployeeDbUtil eDbUtil = new EmployeeDbUtil();
 
-        if (LoginDao.validate(loginBean)) {
+        if (eDbUtil.validate(employee)) {
             response.sendRedirect("/Hris/user.jsp");
         } else {
             response.sendRedirect("/Hris/index.jsp");

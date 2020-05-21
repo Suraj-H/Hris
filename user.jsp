@@ -24,7 +24,7 @@
   </div>
 
   <%
-    if (session.getAttribute("loginBean") != null) {
+    if (session.getAttribute("employee") != null) {
       out.println("session not null!");
     } else {
       out.println("session null!");

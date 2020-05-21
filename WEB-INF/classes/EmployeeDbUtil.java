@@ -1,44 +1,76 @@
-package bean;
+package hris.bean;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.EmployeeBean;
+import hris.bean.Employee;
 
 public class EmployeeDbUtil {
-    private List<EmployeeBean> employees;
+    private List<Employee> employees;
+    private static Connection con;
 
-    public List<EmployeeBean> getEmployees() throws Exception {
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hris_db", "root", "surajh");
+        } catch (Exception igonred) {}
+    }
+
+    public static Connection gConnection() {
+        return con;
+    }
+
+    public boolean validate(Employee employee) {
+        boolean status = false;
+        
+        try {
+            Connection con = gConnection();
+
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM employees WHERE username=? AND password=?");
+
+            ps.setString(1, employee.getUsername());
+            ps.setString(2, employee.getPassword());
+
+            ResultSet rs = ps.executeQuery();
+            status = rs.next();
+
+        } catch (Exception igonred) { }
+
+        return status;
+    }
+
+    public List<Employee> getEmployees() throws Exception {
         employees = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hris_db", "root", "surajh");
-            String query = "SELECT * FROM employee";
+            con = gConnection();
+            String query = "SELECT * FROM employees";
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int employeeId = rs.getInt("employee_id");
-                String fullName = rs.getString("full_name");
-                int age = rs.getInt("age");
-                String address = rs.getString("address");
-                String dateOfBirth = rs.getString("date_of_birth");
-                int phoneNo = rs.getInt("phone_no");
-                String emailId = rs.getString("email_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String state = rs.getString("state");
+                String city = rs.getString("city");
+                Date dateOfBirth = rs.getDate("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
                 String qualification = rs.getString("qualification");
                 String postLevel = rs.getString("post_level");
                 String joiningDate = rs.getString("joining_date");
                 int departmentId = rs.getInt("department_id");
                 int branchId = rs.getInt("branch_id");
-                int salary = rs.getInt("salary");
+                double salary = rs.getDouble("salary");
 
-                EmployeeBean eBean = new EmployeeBean(
-                    employeeId, fullName, age, address, dateOfBirth, phoneNo, emailId, qualification, postLevel, joiningDate, departmentId, branchId, salary);
-                employees.add(eBean);
+                Employee employee = new Employee(
+                    employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+                
+                employees.add(employee);
             }
 
         } catch (Exception ignored) {
@@ -54,7 +86,8 @@ public class EmployeeDbUtil {
         return employees;
     }
 
-    public static boolean addEmployee(EmployeeBean employee) {
+    /*
+    public static boolean addEmployee(Employeemployee employee) {
         int status = 0;
         try {
             Connection con = ConnectionProvider.getConnection();
@@ -81,7 +114,7 @@ public class EmployeeDbUtil {
         return (status != 0);
     }
 
-    public static boolean deleteEmployee(EmployeeBean employee) {
+    public static boolean deleteEmployee(Employeemployee employee) {
         int status = 0;
         try {
             Connection con = ConnectionProvider.getConnection();
@@ -94,4 +127,5 @@ public class EmployeeDbUtil {
 
         return (status != 0);
     }
+    */
 }

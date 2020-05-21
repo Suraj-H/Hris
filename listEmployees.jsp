@@ -1,4 +1,4 @@
-<%@ page import="java.util.*, bean.*, controller.*" %>
+<%@ page import="java.util.*, hris.bean.*, hris.controller.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +11,8 @@
 </head>
 
 <%
-  List<EmployeeBean> employees = 
-    (List<EmployeeBean>) request.getAttribute("employeeList");
+  List<Employee> employees = 
+    (List<Employee>) request.getAttribute("employeeList");
 %>
 
 <body>
@@ -26,12 +26,13 @@
       <table>
         <tr>
           <th>Employee Id</th>
-          <th>Full Name</th>
-          <th>Age</th>
-          <th>Address</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>State</th>
+          <th>City</th>
           <th>Date of Birth</th>
           <th>Phone No</th>
-          <th>Email Id</th>
+          <th>Email</th>
           <th>Qualification</th>
           <th>Post Level</th>
           <th>Joining Date</th>
@@ -40,16 +41,17 @@
           <th>Salary</th>
         </tr>
 
-        <% for (EmployeeBean employee : employees) { %>
+        <% for (Employee employee : employees) { %>
         
           <tr>
             <td><%= employee.getEmployeeId() %></td>
-            <td><%= employee.getFullName() %></td>
-            <td><%= employee.getAge() %></td>
-            <td><%= employee.getAddress() %></td>
+            <td><%= employee.getFirstName() %></td>
+            <td><%= employee.getLastName() %></td>
+            <td><%= employee.getState() %></td>
+            <td><%= employee.getCity() %></td>
             <td><%= employee.getDateOfBirth() %></td>
             <td><%= employee.getPhoneNo() %></td>
-            <td><%= employee.getEmailId() %></td>
+            <td><%= employee.getEmail() %></td>
             <td><%= employee.getQualification() %></td>
             <td><%= employee.getPostLevel() %></td>
             <td><%= employee.getJoiningDate() %></td>
