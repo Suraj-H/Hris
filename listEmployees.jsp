@@ -16,6 +16,7 @@
 %>
 
 <body>
+  <a href="user.jsp">User</a><hr>
   <div id="wrapper" class="wrapper">
     <div id="header" class="header">
       <h2 style="text-align: center;">Employee Full List</h2>
