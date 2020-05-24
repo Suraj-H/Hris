@@ -15,10 +15,9 @@
       </form>
 
       <a href="index.jsp"><button type="button">Home</button></a>
-      <a href="editInfo.jsp"><button type="button">Edit Info</button></a>
-      <a href="getInfo.jsp"><button type="button">Get Info</button></a>
-      <a href="viewDetails.jsp"><button type="button">Employee List</button></a>
-      <a href="addEmployee.jsp"><button type="button">Add Employee</button></a>
+      <input type="button" value="List Employee" onclick="window.location.href='/Hris/listEmployees'">
+      <input type="button" value="Add Employee" 
+        onclick="window.location.href='addEmployee.jsp; return false;'">
     </div>
     <hr>
   </div>

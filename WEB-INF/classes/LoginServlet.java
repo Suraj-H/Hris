@@ -11,7 +11,6 @@ import java.io.IOException;
 import hris.bean.Employee;
 import hris.bean.EmployeeDbUtil;
 
-
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -21,19 +20,19 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        Employee employee = (Employee) session.getAttribute("employee");
+        Employee eLogin = (Employee) session.getAttribute("eLogin");
         
         if (session.isNew()) {
-            employee = new Employee(request.getParameter("username"), request.getParameter("password"));
-            session.setAttribute("employee", employee);
+            eLogin = new Employee(request.getParameter("j_username"), request.getParameter("j_password"));
+            session.setAttribute("eLogin", eLogin);
         }
         
         EmployeeDbUtil eDbUtil = new EmployeeDbUtil();
 
-        if (eDbUtil.validate(employee)) {
+        if (eDbUtil.validate(eLogin)) {
             response.sendRedirect("/Hris/user.jsp");
         } else {
-            response.sendRedirect("/Hris/index.jsp");
+            response.sendRedirect("/Hris/user.jsp");
         }
     }
 }

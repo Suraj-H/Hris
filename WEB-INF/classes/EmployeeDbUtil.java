@@ -1,29 +1,30 @@
 package hris.bean;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.util.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import hris.bean.Employee;
 
 public class EmployeeDbUtil {
     private List<Employee> employees;
     private static Connection con;
 
-    static {
+    public static Connection gConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hris_db", "root", "surajh");
-        } catch (Exception igonred) {}
-    }
+        } catch (Exception igonred) {
+        }
 
-    public static Connection gConnection() {
         return con;
     }
 
     public boolean validate(Employee employee) {
         boolean status = false;
-        
+
         try {
             Connection con = gConnection();
 
@@ -35,7 +36,8 @@ public class EmployeeDbUtil {
             ResultSet rs = ps.executeQuery();
             status = rs.next();
 
-        } catch (Exception igonred) { }
+        } catch (Exception igonred) {
+        }
 
         return status;
     }
@@ -57,7 +59,7 @@ public class EmployeeDbUtil {
                 String lastName = rs.getString("last_name");
                 String state = rs.getString("state");
                 String city = rs.getString("city");
-                Date dateOfBirth = rs.getDate("date_of_birth");
+                String dateOfBirth = rs.getString("date_of_birth");
                 long phoneNo = rs.getLong("phone_no");
                 String email = rs.getString("email");
                 String qualification = rs.getString("qualification");
@@ -67,9 +69,9 @@ public class EmployeeDbUtil {
                 int branchId = rs.getInt("branch_id");
                 double salary = rs.getDouble("salary");
 
-                Employee employee = new Employee(
-                    employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
-                
+                Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
+                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+
                 employees.add(employee);
             }
 
@@ -80,52 +82,137 @@ public class EmployeeDbUtil {
                 rs.close();
                 ps.close();
                 con.close();
-            } catch (Exception e) { }
+            } catch (Exception e) {
+            }
         }
 
         return employees;
     }
 
-    /*
-    public static boolean addEmployee(Employeemployee employee) {
-        int status = 0;
+    public Employee getEmployee(int employeeId) throws Exception {
+
+        Employee employee = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
-            Connection con = ConnectionProvider.getConnection();
-            String query = "INSERT INTO employee(full_name, age, address, date_of_birth, phone_no, email_id, qualification, post_level, joining_date, department_id, branch_id, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, employee.getFullName());
-            ps.setInt(2, employee.getAge());
-            ps.setString(3, employee.getAddress());
-            ps.setString(4, employee.getDateOfBirth());
-            ps.setInt(5, employee.getPhoneNo());
-            ps.setString(6, employee.getEmailId());
-            ps.setString(7, employee.getQualification());
-            ps.setString(8, employee.getPostLevel());
-            ps.setString(9, employee.getJoiningDate());
-            ps.setInt(10, employee.getDepartmentId());
-            ps.setInt(11, employee.getBranchId());
-            ps.setInt(12, employee.getSalary());
+            con = gConnection();
+            String query = "SELECT * FROM employees WHERE employee_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            rs = ps.executeQuery();
 
-            status = ps.executeUpdate();
+            if (rs.next()) {
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String state = rs.getString("state");
+                String city = rs.getString("city");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String postLevel = rs.getString("post_level");
+                String joiningDate = rs.getString("joining_date");
+                int departmentId = rs.getInt("department_id");
+                int branchId = rs.getInt("branch_id");
+                double salary = rs.getDouble("salary");
 
-        } catch (Exception ignored) {
+                employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
+                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+            } else {
+                throw new Exception("Could not find employee with " + employeeId);
+            }
+
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
         }
 
-        return (status != 0);
+        return employee;
     }
 
-    public static boolean deleteEmployee(Employeemployee employee) {
-        int status = 0;
+    public void updateEmployee(Employee employee) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
         try {
-            Connection con = ConnectionProvider.getConnection();
-            String query = "DELETE FROM employee WHERE employee_id=?";
-            PreparedStatement ps = con.prepareStatement(query);
+            con = gConnection();
+            String query = "UPDATE employees " + 
+                "SET first_name=?, last_name=?, state=?, city=?, date_of_birth=?, phone_no=?, email=?, qualification=?, post_level=?, joining_date=?, department_id=?, branch_id=?, salary=? " + 
+                "WHERE employee_id=?";
+            
+            ps = con.prepareStatement(query);
+            ps.setString(1, employee.getFirstName());
+            ps.setString(2, employee.getLastName());
+            ps.setString(3, employee.getState());
+            ps.setString(4, employee.getCity());
+            ps.setString(5, employee.getDateOfBirth());
+            ps.setLong(6, employee.getPhoneNo());
+            ps.setString(7, employee.getEmail());
+            ps.setString(8, employee.getQualification());
+            ps.setString(9, employee.getPostLevel());
+            ps.setString(10, employee.getJoiningDate());
+            ps.setInt(11, employee.getDepartmentId());
+            ps.setInt(12, employee.getBranchId());
+            ps.setDouble(13, employee.getSalary());
+            ps.setInt(14, employee.getEmployeeId());
+            ps.execute();
+
+        } finally {
+            ps.close();
+            con.close();
+        }      
+    }
+
+    public void addEmployee(Employee employee) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = EmployeeDbUtil.gConnection();
+            String query = "INSERT INTO employees " + 
+                "(employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, department_id, branch_id, salary, username, password) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(query);
             ps.setInt(1, employee.getEmployeeId());
-            status = ps.executeUpdate();
-        } catch (Exception ignored) {
+            ps.setString(2, employee.getFirstName());
+            ps.setString(3, employee.getLastName());
+            ps.setString(4, employee.getState());
+            ps.setString(5, employee.getCity());
+            ps.setString(6, employee.getDateOfBirth());
+            ps.setLong(7, employee.getPhoneNo());
+            ps.setString(8, employee.getEmail());
+            ps.setString(9, employee.getQualification());
+            ps.setString(10, employee.getPostLevel());
+            ps.setString(11, employee.getJoiningDate());
+            ps.setInt(12, employee.getDepartmentId());
+            ps.setInt(13, employee.getBranchId());
+            ps.setDouble(14, employee.getSalary());
+            ps.setString(15, employee.getUsername());
+            ps.setString(16, employee.getPassword());
+            ps.executeUpdate();
+        } finally {
+            ps.close();
+            con.close();
         }
-
-        return (status != 0);
     }
-    */
+
+    public void deleteEmployee(int employeeId) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = gConnection();
+            String query = "DELETE FROM employees WHERE employee_id=?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            ps.execute();
+        } finally {
+            ps.close();
+            con.close();
+        }
+    }
+
 }

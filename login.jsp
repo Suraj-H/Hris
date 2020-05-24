@@ -13,13 +13,13 @@
     <form id="form" class="form" action="/Hris/login" method="POST">
       <h2>Login Page</h2>
       <div class="form-control">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Enter username">
+        <label for="j_username">Username</label>
+        <input type="text" name="j_username" id="j_username" placeholder="Enter username">
         <small>error message</small>
       </div>
       <div class="form-control">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter password">
+        <label for="j_password">Password</label>
+        <input type="password" name="j_password" id="j_password" placeholder="Enter password">
         <small>error message</small>
       </div>
       <button type="submit">Submit</button>

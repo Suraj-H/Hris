@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
 html, body{
-	margin-left:15px; margin-right:15px; 
+	margin-left:5px; margin-right:5px; 
 	padding:0px; 
 	font-family: 'Open Sans', sans-serif;
 }
@@ -10,7 +10,7 @@ table {
 	border-collapse:collapse;
 	border-bottom:1px solid gray;
 	font-family: 'Open Sans', sans-serif;
-	width:72%;
+	width:20%;
 }
  
 th {
@@ -28,9 +28,3 @@ tr {
 tr:nth-child(even) {background: #ECEFF4}
 tr:nth-child(odd) {background: #D8DEE9}	
  
-#wrapper {width: 100%; margin-top: 0px; display: flex; align-items: center; justify-content: center; align-content: center;}
-#header {width: 25%; background: #81A1C1; margin-top: 0px; padding:15px 0px 15px 0px; display: flex; align-items: center; justify-content: center; align-content: center;}
-#header h2 {width: 100%; margin:auto; color: #FFFFFF;}
-#container {width: 100%; margin:auto}
-#container h3 {color: #000;}
-#container #content {margin-top: 20px;}

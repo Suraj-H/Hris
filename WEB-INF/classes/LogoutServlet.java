@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import hris.bean.Employee;
 
-
 public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
             session.setAttribute("employee", employee);
             session.invalidate();
             session = null;
-        }
+        } 
 
         response.sendRedirect("/Hris/index.jsp");
     }

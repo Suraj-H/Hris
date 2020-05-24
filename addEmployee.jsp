@@ -5,24 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Employee</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="">
 </head>
 
 <body>
   <div class="container">
-    <form action="/Hris/AddEmployeeServlet.java" method="POST" id="form" class="form">
-      <h2>Add Employee</h2>
+    <h2>Add Employee</h2>
+    <form action="/Hris/addEmployee" method="GET" id="form" class="form">
+      <input type="hidden" name="command" value="ADD">
       <div class="form-control">
         <input type="text" name="employeeId" id="employeeId" placeholder="Enter employee id">
       </div>
       <div class="form-control">
-        <input type="text" name="fullName" id="fullName" placeholder="Enter full name">
+        <input type="text" name="firstName" id="firstName" placeholder="Enter first name">
       </div>
       <div class="form-control">
-        <input type="text" name="age" id="age" placeholder="Enter age">
+        <input type="text" name="lastName" id="lastName" placeholder="Enter last name">
       </div>
       <div class="form-control">
-        <input type="text" name="address" id="address" placeholder="Enter address">
+        <input type="text" name="state" id="state" placeholder="Enter state">
+      </div>
+      <div class="form-control">
+        <input type="text" name="city" id="city" placeholder="Enter city">
       </div>
       <div class="form-control">
         <input type="text" name="dateOfBirth" id="dateOfBirth" placeholder="Enter date of birth">
@@ -31,7 +35,7 @@
         <input type="text" name="phoneNo" id="phoneNo" placeholder="Enter phone number">
       </div>
       <div class="form-control">
-        <input type="text" name="emailId" id="emailId" placeholder="Enter email id">
+        <input type="text" name="email" id="email" placeholder="Enter email id">
       </div>
       <div class="form-control">
         <input type="text" name="qualification" id="qualification" placeholder="Enter qualification">
@@ -50,6 +54,12 @@
       </div>
       <div class="form-control">
         <input type="text" name="salary" id="salary" placeholder="Enter salary">
+      </div>
+      <div class="form-control">
+        <input type="text" name="username" id="username" placeholder="Enter username">
+      </div>
+      <div class="form-control">
+        <input type="text" name="password" id="password" placeholder="Enter password">
       </div>
       <button type="submit">Submit</button>
     </form>

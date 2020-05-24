@@ -1,5 +1,8 @@
 {
     "java.project.referencedLibraries": [
-        "c:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\lib\\servlet-api.jar"
+        "c:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\lib\\servlet-api.jar",
+        "c:\\Users\\SurajH\\Downloads\\Documents\\Documents\\Visual Studio Projects\\Spring 4\\Spring 4\\libs\\spring-core-4.0.0.RELEASE.jar",
+        "c:\\Users\\SurajH\\Downloads\\Documents\\Documents\\Visual Studio Projects\\Spring 4\\Spring 4\\libs\\spring-jdbc-4.0.0.RELEASE.jar",
+        "c:\\Users\\SurajH\\Downloads\\Documents\\Documents\\Visual Studio Projects\\Spring 4\\Spring 4\\libs\\spring-context-4.0.0.RELEASE.jar"
     ]
 }
