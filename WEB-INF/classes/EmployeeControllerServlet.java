@@ -99,7 +99,6 @@ public class EmployeeControllerServlet extends HttpServlet {
         request.getRequestDispatcher("/updateEmployee.jsp").forward(request, response);
     }
 
-    
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         int employeeId = Integer.parseInt(request.getParameter("employeeId"));

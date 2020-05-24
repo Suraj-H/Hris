@@ -118,8 +118,8 @@ public class EmployeeDbUtil {
                 int branchId = rs.getInt("branch_id");
                 double salary = rs.getDouble("salary");
 
-                employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
-                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+                employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
+                        qualification, postLevel, joiningDate, departmentId, branchId, salary);
             } else {
                 throw new Exception("Could not find employee with " + employeeId);
             }
@@ -139,10 +139,10 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "UPDATE employees " + 
-                "SET first_name=?, last_name=?, state=?, city=?, date_of_birth=?, phone_no=?, email=?, qualification=?, post_level=?, joining_date=?, department_id=?, branch_id=?, salary=? " + 
-                "WHERE employee_id=?";
-            
+            String query = "UPDATE employees "
+                    + "SET first_name=?, last_name=?, state=?, city=?, date_of_birth=?, phone_no=?, email=?, qualification=?, post_level=?, joining_date=?, department_id=?, branch_id=?, salary=? "
+                    + "WHERE employee_id=?";
+
             ps = con.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
@@ -163,7 +163,7 @@ public class EmployeeDbUtil {
         } finally {
             ps.close();
             con.close();
-        }      
+        }
     }
 
     public void addEmployee(Employee employee) throws Exception {
@@ -172,9 +172,9 @@ public class EmployeeDbUtil {
 
         try {
             con = EmployeeDbUtil.gConnection();
-            String query = "INSERT INTO employees " + 
-                "(employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, department_id, branch_id, salary, username, password) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO employees "
+                    + "(employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, department_id, branch_id, salary, username, password) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(query);
             ps.setInt(1, employee.getEmployeeId());
             ps.setString(2, employee.getFirstName());

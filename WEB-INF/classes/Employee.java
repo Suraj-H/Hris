@@ -26,8 +26,9 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, 
-            String dateOfBirth, long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId, int branchId, double salary) {
+    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
+            long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
+            int branchId, double salary) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,8 +45,9 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, 
-            String dateOfBirth, long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId, int branchId, double salary, String username, String password) {
+    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
+            long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
+            int branchId, double salary, String username, String password) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -194,8 +196,11 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [branchId=" + branchId + ", city=" + city + ", dateOfBirth=" + dateOfBirth + 
-            "departmentId=" + departmentId + ", email=" + email + ", employeeId=" + employeeId + ", firstName=" + firstName + ", joiningDate=" + joiningDate + ", lastName=" + lastName + ", password=" + password + ", phoneNo=" + phoneNo + ", postLevel=" + postLevel + ", qualification=" + qualification + ", salary=" + salary + "]";
+        return "Employee [branchId=" + branchId + ", city=" + city + ", dateOfBirth=" + dateOfBirth + "departmentId="
+                + departmentId + ", email=" + email + ", employeeId=" + employeeId + ", firstName=" + firstName
+                + ", joiningDate=" + joiningDate + ", lastName=" + lastName + ", password=" + password + ", phoneNo="
+                + phoneNo + ", postLevel=" + postLevel + ", qualification=" + qualification + ", salary=" + salary
+                + "]";
     }
 
     @Override
@@ -203,7 +208,7 @@ public class Employee {
         final int prime = 31;
         int result = 1;
         result = prime * result + branchId;
-        
+
         return result;
     }
 
@@ -215,11 +220,11 @@ public class Employee {
             return false;
         if (getClass() != obj.getClass())
             return false;
-            
+
         Employee other = (Employee) obj;
         if (branchId != other.branchId)
             return false;
-        
+
         return true;
     }
 }
