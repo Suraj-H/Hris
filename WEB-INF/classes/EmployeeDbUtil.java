@@ -22,24 +22,52 @@ public class EmployeeDbUtil {
         return con;
     }
 
-    public boolean validate(Employee employee) {
-        boolean status = false;
+    public Employee validate(String user, String pass) throws Exception {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        String query = "SELECT * FROM employees WHERE username=? AND password=?";
+        ResultSet rs = null;
+        Employee employee = null;
 
         try {
-            Connection con = gConnection();
+            con = gConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, user);
+            ps.setString(2, pass);
+            rs = ps.executeQuery();
 
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM employees WHERE username=? AND password=?");
+            if (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String state = rs.getString("state");
+                String city = rs.getString("city");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String postLevel = rs.getString("post_level");
+                String joiningDate = rs.getString("joining_date");
+                int departmentId = rs.getInt("department_id");
+                int branchId = rs.getInt("branch_id");
+                double salary = rs.getDouble("salary");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
 
-            ps.setString(1, employee.getUsername());
-            ps.setString(2, employee.getPassword());
+                employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
+                        qualification, postLevel, joiningDate, departmentId, branchId, salary, username, password);
 
-            ResultSet rs = ps.executeQuery();
-            status = rs.next();
+                return employee;
+            }
 
-        } catch (Exception igonred) {
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
         }
 
-        return status;
+        return null;
     }
 
     public List<Employee> getEmployees() throws Exception {

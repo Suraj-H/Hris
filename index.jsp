@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +11,13 @@
 
 <body>
   <div class="home">
-    <a href="login.jsp"><button>Login</button></a>
-    <a href="about.jsp"><button>About</button></a>
+    <c:if test="${eLogin == null}">
+      <input type="button" value="Login" onclick="window.location.href='/Hris/login.jsp'">
+    </c:if>
+    <c:if test="${eLogin != null}">
+      <input type="button" value="Welcome,${eLogin.firstName}" onclick="window.location.href='/Hris/user.jsp'">
+      <input type="button" value="Logout" onclick="window.location.href='/Hris/logout'">
+    </c:if>
   </div>
   
   <hr>

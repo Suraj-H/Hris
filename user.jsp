@@ -14,7 +14,8 @@
         <button type="submit" name="logout">Logout</button><br><br>
       </form>
 
-      <a href="index.jsp"><button type="button">Home</button></a>
+      <input type="button" value="Home" 
+      onclick="window.location.href='index.jsp; return false;'">
       <input type="button" value="List Employee" onclick="window.location.href='/Hris/listEmployees'">
       <input type="button" value="Add Employee" 
         onclick="window.location.href='addEmployee.jsp; return false;'">

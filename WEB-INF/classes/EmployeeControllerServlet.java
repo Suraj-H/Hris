@@ -32,6 +32,10 @@ public class EmployeeControllerServlet extends HttpServlet {
                     listEmployees(request, response);
                     break;
 
+                case "LOGIN":
+                    login(request, response);
+                    break;
+
                 case "ADD":
                     addEmployee(request, response);
                     break;
@@ -67,6 +71,23 @@ public class EmployeeControllerServlet extends HttpServlet {
         }
     }
 
+    private void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        try {
+            Employee employee = new EmployeeDbUtil().validate(username, password);
+
+            if (employee == null)
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            else {
+                request.getSession().setAttribute("eLogin", employee);
+                request.getRequestDispatcher("/user.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+
     private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         int employeeId = Integer.parseInt(request.getParameter("employeeId"));
@@ -82,7 +103,7 @@ public class EmployeeControllerServlet extends HttpServlet {
         String joiningDate = request.getParameter("joiningDate");
         int departmentId = Integer.parseInt(request.getParameter("departmentId"));
         int branchId = Integer.parseInt(request.getParameter("branchId"));
-        double salary = Double.parseDouble(request.getParameter("departmentId"));
+        double salary = Double.parseDouble(request.getParameter("salary"));
 
         Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
                 qualification, postLevel, joiningDate, departmentId, branchId, salary);

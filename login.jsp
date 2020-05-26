@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,16 +12,17 @@
 
 <body>
   <div class="container">
-    <form id="form" class="form" action="/Hris/login" method="POST">
+    <form id="form" class="form" action="/Hris/login" method="GET">
+      <input type="hidden" name="command" value="LOGIN">
       <h2>Login Page</h2>
       <div class="form-control">
-        <label for="j_username">Username</label>
-        <input type="text" name="j_username" id="j_username" placeholder="Enter username">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter username">
         <small>error message</small>
       </div>
       <div class="form-control">
-        <label for="j_password">Password</label>
-        <input type="password" name="j_password" id="j_password" placeholder="Enter password">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter password">
         <small>error message</small>
       </div>
       <button type="submit">Submit</button>

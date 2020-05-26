@@ -35,13 +35,13 @@
     <!-- login servlet -->
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>hris.controller.LoginServlet</servlet-class>
+        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
+         
     <!-- logout servlet -->
     <servlet>
         <servlet-name>LogoutController</servlet-name>
@@ -52,8 +52,8 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
-    <!-- listEmployee servlet -->
-    <servlet>
+    <!-- listEmployee servlet --> 
+    <servlet>  
         <servlet-name>ListEmployeeController</servlet-name>
         <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
