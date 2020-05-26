@@ -16,17 +16,12 @@
     </c:if>
     <c:if test="${eLogin != null}">
       <input type="button" value="Welcome,${eLogin.firstName}" onclick="window.location.href='/Hris/user.jsp'">
-      <input type="button" value="Logout" onclick="window.location.href='/Hris/logout'">
+      <form action="/Hris/logout" method="GET">
+        <input type="hidden" name="command" value="LOGOUT">
+        <input type="submit" value="Logout">
+      </form>
     </c:if>
   </div>
-  
-  <hr>
-  <%  if (session.getAttribute("employee") == null) { %>
-    <p>user not logged in.</p>  
-  <% } else { %>
-    <p>user already logged in.</p> 
-  <% } %>
-
 </body>
 
 </html>

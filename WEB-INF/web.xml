@@ -45,17 +45,17 @@
     <!-- logout servlet -->
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>hris.controller.LogoutServlet</servlet-class>
+        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LogoutController</servlet-name>
+        <servlet-name>LogoutController</servlet-name>  
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <!-- listEmployee servlet --> 
     <servlet>  
         <servlet-name>ListEmployeeController</servlet-name>
-        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
+        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class> 
     </servlet>
     <servlet-mapping>
         <servlet-name>ListEmployeeController</servlet-name>

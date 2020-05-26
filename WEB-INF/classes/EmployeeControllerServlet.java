@@ -36,6 +36,10 @@ public class EmployeeControllerServlet extends HttpServlet {
                     login(request, response);
                     break;
 
+                case "LOGOUT":
+                    logout(request, response);
+                    break;
+
                 case "ADD":
                     addEmployee(request, response);
                     break;
@@ -86,6 +90,11 @@ public class EmployeeControllerServlet extends HttpServlet {
         } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.getSession().removeAttribute("eLogin");
+        response.sendRedirect("/Hris/index.jsp");
     }
 
     private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
