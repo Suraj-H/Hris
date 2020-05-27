@@ -93,7 +93,7 @@
     </servlet-mapping>
 
     <!-- searchEmployee servlet -->
-    <servlet> 
+    <servlet>
         <servlet-name>SearchEmployeeController</servlet-name>
         <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
@@ -109,7 +109,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>FilterEmployeeController</servlet-name>
-        <url-pattern>/search</url-pattern> 
-    </servlet-mapping> 
- 
-</web-app>                 
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+</web-app> 

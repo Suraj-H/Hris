@@ -78,7 +78,7 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "SELECT * FROM employees";
+            String query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.branch_id = e.branch_id INNER JOIN department_info d ON d.department_id = e.department_id ORDER BY e.employee_id";
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -93,12 +93,12 @@ public class EmployeeDbUtil {
                 String qualification = rs.getString("qualification");
                 String postLevel = rs.getString("post_level");
                 String joiningDate = rs.getString("joining_date");
-                int departmentId = rs.getInt("department_id");
-                int branchId = rs.getInt("branch_id");
+                String departmentName = rs.getString("department_name");
+                String branchLocation = rs.getString("branch_location");
                 double salary = rs.getDouble("salary");
 
                 Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
-                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+                        email, qualification, postLevel, joiningDate, departmentName, branchLocation, salary);
 
                 employees.add(employee);
             }
@@ -212,11 +212,11 @@ public class EmployeeDbUtil {
             con = gConnection();
             String query = null;
             if (qual.length() != 0 && pL.length() != 0) {
-                query = "SELECT * FROM employees WHERE qualification=? AND post_level=?";
+                query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.branch_id = e.branch_id INNER JOIN department_info d ON d.department_id = e.department_id WHERE qualification=? AND post_level=?";
             } else if (qual.length() != 0 && pL.length() == 0) {
-                query = "SELECT * FROM employees WHERE qualification=?";
+                query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.branch_id = e.branch_id INNER JOIN department_info d ON d.department_id = e.department_id WHERE qualification=?";
             } else if (qual.length() == 0 && pL.length() != 0) {
-                query = "SELECT * FROM employees WHERE post_level=?";
+                query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.branch_id = e.branch_id INNER JOIN department_info d ON d.department_id = e.department_id WHERE post_level=?";
             }
 
             ps = con.prepareStatement(query);
@@ -244,12 +244,12 @@ public class EmployeeDbUtil {
                 String qualification = rs.getString("qualification");
                 String postLevel = rs.getString("post_level");
                 String joiningDate = rs.getString("joining_date");
-                int departmentId = rs.getInt("department_id");
-                int branchId = rs.getInt("branch_id");
+                String departmentName = rs.getString("department_name");
+                String branchLocation = rs.getString("branch_location");
                 double salary = rs.getDouble("salary");
 
                 Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
-                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+                        email, qualification, postLevel, joiningDate, departmentName, branchLocation, salary);
 
                 es.add(employee);
             }
@@ -270,7 +270,7 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "SELECT * FROM employees WHERE salary < ? AND salary > ? ORDER BY salary";
+            String query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.branch_id = e.branch_id INNER JOIN department_info d ON d.department_id = e.department_id WHERE salary < ? AND salary > ? ORDER BY salary";
 
             if (value.equals("A")) {
                 query = query + " ASC";
@@ -295,12 +295,12 @@ public class EmployeeDbUtil {
                 String qualification = rs.getString("qualification");
                 String postLevel = rs.getString("post_level");
                 String joiningDate = rs.getString("joining_date");
-                int departmentId = rs.getInt("department_id");
-                int branchId = rs.getInt("branch_id");
+                String departmentName = rs.getString("department_name");
+                String branchLocation = rs.getString("branch_location");
                 double salary = rs.getDouble("salary");
 
                 Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
-                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+                        email, qualification, postLevel, joiningDate, departmentName, branchLocation, salary);
 
                 es.add(employee);
             }

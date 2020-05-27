@@ -35,8 +35,8 @@
           <th>Qualification</th>
           <th>Post Level</th>
           <th>Joining Date</th>
-          <th>Department Id</th>
-          <th>Branch Id</th>
+          <th>Branch Location</th>
+          <th>Department Name</th>
           <th>Salary</th>
           <th>Action</th>
         </tr>
@@ -65,8 +65,8 @@
             <td> ${employeeBean.qualification} </td>
             <td> ${employeeBean.postLevel} </td>
             <td> ${employeeBean.joiningDate} </td>
-            <td> ${employeeBean.departmentId} </td>
-            <td> ${employeeBean.branchId} </td>
+            <td> ${employeeBean.branchLocation} </td>
+            <td> ${employeeBean.departmentName} </td>
             <td> ${employeeBean.salary} </td>
             <td> 
               <a href="${updateLink}">Update</a> | <a href="${deleteLink}" onclick="if (!(confirm('confirm on delete this employee?'))) return false">Delete</a> 

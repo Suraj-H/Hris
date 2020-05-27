@@ -17,6 +17,8 @@ public class Employee {
     private double salary;
     private String username;
     private String password;
+    private String departmentName;
+    private String branchLocation;
 
     public Employee() {
     }
@@ -46,6 +48,27 @@ public class Employee {
     }
 
     public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
+            long phoneNo, String email, String qualification, String postLevel, String joiningDate, String departmentName,
+            String branchLocation, double salary, String username, String password) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.state = state;
+        this.city = city;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.postLevel = postLevel;
+        this.joiningDate = joiningDate;
+        this.departmentName = departmentName;
+        this.branchLocation = branchLocation;
+        this.salary = salary;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
             long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
             int branchId, double salary, String username, String password) {
         this.employeeId = employeeId;
@@ -66,6 +89,24 @@ public class Employee {
         this.password = password;
     }
 
+    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
+            long phoneNo, String email, String qualification, String postLevel, String joiningDate, String departmentName, String branchLocation, double salary) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.state = state;
+        this.city = city;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.postLevel = postLevel;
+        this.joiningDate = joiningDate;
+        this.departmentName = departmentName;
+        this.branchLocation = branchLocation;
+        this.salary = salary;
+    }
+    
     public int getEmployeeId() {
         return employeeId;
     }
@@ -194,6 +235,22 @@ public class Employee {
         this.password = password;
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getBranchLocation() {
+        return branchLocation;
+    }
+
+    public void setBranchLocation(String branchLocation) {
+        this.branchLocation = branchLocation;
+    }
+
     @Override
     public String toString() {
         return "Employee [branchId=" + branchId + ", city=" + city + ", dateOfBirth=" + dateOfBirth + "departmentId="
@@ -227,4 +284,8 @@ public class Employee {
 
         return true;
     }
+
+    
+
+    
 }

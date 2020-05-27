@@ -36,8 +36,8 @@
           <th>Qualification</th>
           <th>Post Level</th>
           <th>Joining Date</th>
-          <th>Department Id</th>
-          <th>Branch Id</th>
+          <th>Branch Location</th>
+          <th>Department Name</th>
           <th>Salary</th>
         </tr>
 
@@ -55,8 +55,8 @@
             <td> ${employeeBean.qualification} </td>
             <td> ${employeeBean.postLevel} </td>
             <td> ${employeeBean.joiningDate} </td>
-            <td> ${employeeBean.departmentId} </td>
-            <td> ${employeeBean.branchId} </td>
+            <td> ${employeeBean.branchLocation} </td>
+            <td> ${employeeBean.departmentName} </td>
             <td> ${employeeBean.salary} </td>
           </tr>
         </c:forEach>
