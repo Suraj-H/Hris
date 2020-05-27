@@ -31,11 +31,23 @@ public class SearchControllerServlet extends HttpServlet {
                     listQPL(request, response);
                     break;
 
+                case "L":
+                    listLocation(request, response);
+                    break;
             }
 
         } catch (Exception e) {
         }
 
+    }
+
+    private void listLocation(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String state = request.getParameter("state");
+        String city = request.getParameter("city");
+        List<Employee> es = new EmployeeDbUtil().getLocation(state, city);
+        request.setAttribute("locationList", es);
+        request.setAttribute("search", "locationList");
+        request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
     }
 
     private void listSalary(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -50,7 +62,7 @@ public class SearchControllerServlet extends HttpServlet {
     private void listQPL(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String qualification = request.getParameter("qualification");
         String postLevel = request.getParameter("postLevel");
-               
+
         List<Employee> es = new EmployeeDbUtil().getQPL(qualification, postLevel);
         request.setAttribute("qualificationList", es);
         request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
