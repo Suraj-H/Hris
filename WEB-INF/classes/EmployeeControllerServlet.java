@@ -56,6 +56,10 @@ public class EmployeeControllerServlet extends HttpServlet {
                     deleteEmployee(request, response);
                     break;
 
+                // case "SEARCH":
+                //     searchEmployee(request, response);
+                //     break;
+
                 default:
                     listEmployees(request, response);
             }
@@ -96,6 +100,53 @@ public class EmployeeControllerServlet extends HttpServlet {
         request.getSession().removeAttribute("eLogin");
         response.sendRedirect("/Hris/index.jsp");
     }
+
+    // private void searchEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    //     String EMPLOYEEID = request.getParameter("employeeId");
+    //     String FIRSTNAME = request.getParameter("firstName");
+    //     String LASTNAME = request.getParameter("lastName");
+    //     String STATE = request.getParameter("state");
+    //     String CITY = request.getParameter("city");
+    //     String DATEOFBIRTH = request.getParameter("dateOfBirth");
+    //     String PHONENO = request.getParameter("phoneNo");
+    //     String EMAIL = request.getParameter("email");
+    //     String QUALIFICATION = request.getParameter("qualification");
+    //     String POSTLEVEL = request.getParameter("postLevel");
+    //     String JOININGDATE = request.getParameter("joiningDate");
+    //     String DEPARTMENTID = request.getParameter("departmentId");
+    //     String BRANCHID = request.getParameter("branchId");
+    //     String SALARY = request.getParameter("salary");
+
+    //     if (EMPLOYEEID == "" && FIRSTNAME == "" && LASTNAME == "" && STATE == "" && CITY == "" 
+    //             && DATEOFBIRTH == "" && PHONENO == "" && EMAIL == "" && QUALIFICATION == "" && POSTLEVEL == "" 
+    //             && JOININGDATE == "" && DEPARTMENTID == "" && BRANCHID == "" && SALARY == "") {
+    //         Employee employee = null;
+    //     }
+
+    //     int employeeId = EMPLOYEEID.equals("") ? 0 : Integer.parseInt(EMPLOYEEID);
+    //     String firstName = FIRSTNAME.equals("") ? "" : FIRSTNAME;
+    //     String lastName = LASTNAME.equals("") ? "" : LASTNAME;
+    //     String state = STATE.equals("") ? "" : STATE;
+    //     String city = CITY.equals("") ? "" : CITY;
+    //     String dateOfBirth = DATEOFBIRTH.equals("") ? "" : DATEOFBIRTH;
+    //     long phoneNo = PHONENO.equals("") ? 0 : Long.parseLong(PHONENO);
+    //     String email = EMAIL.equals("") ? "" : EMAIL;
+    //     String qualification = QUALIFICATION.equals("") ? "" : QUALIFICATION;
+    //     String postLevel = POSTLEVEL.equals("") ? "" : POSTLEVEL;
+    //     String joiningDate = JOININGDATE.equals("") ? "" : JOININGDATE;
+    //     int departmentId = DEPARTMENTID.equals("") ? 0 : Integer.parseInt(DEPARTMENTID);
+    //     int branchId = BRANCHID.equals("") ? 0 : Integer.parseInt(BRANCHID);
+    //     double salary = SALARY.equals("") ? 0 : Double.parseDouble(SALARY);
+
+    //     Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
+    //             qualification, postLevel, joiningDate, departmentId, branchId, salary);
+
+    //     List<Employee> es = new EmployeeDbUtil().searchEmployees(employee);
+    //     request.setAttribute("employeeFound", es);
+
+    //     request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
+    // }
 
     private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 

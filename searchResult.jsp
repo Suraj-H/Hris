@@ -7,8 +7,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>List Employees</title>
-  <link type="text/css" rel="stylesheet" href="table.css">
+  <title>Search Result List</title>
+  <link rel="stylesheet" href="table.css">
 </head>
 
 <body>
@@ -20,7 +20,8 @@
       <h2 style="text-align: center;">Employee Full List</h2>
     </div>
   </div>
-  <div class="container" id="container">
+  <!-- <div class="container" id="salary"> -->
+  <div class="container" id="qualification">
     <div class="content" id="content">
       <table>
         <tr>
@@ -38,21 +39,10 @@
           <th>Department Id</th>
           <th>Branch Id</th>
           <th>Salary</th>
-          <th>Action</th>
         </tr>
 
-        <c:forEach var="employeeBean" items="${employeeList}">
-          
-          <c:url var="updateLink" value="updateEmployee">
-            <c:param name="command" value="LOAD" />
-            <c:param name="employeeId" value="${employeeBean.employeeId}" />
-          </c:url>
+        <c:forEach var="employeeBean" items="${qualificationList}">
 
-          <c:url var="deleteLink" value="updateEmployee">
-            <c:param name="command" value="DELETE" />
-            <c:param name="employeeId" value="${employeeBean.employeeId}" />
-          </c:url>
-        
           <tr>
             <td> ${employeeBean.employeeId} </td>
             <td> ${employeeBean.firstName} </td>
@@ -68,15 +58,13 @@
             <td> ${employeeBean.departmentId} </td>
             <td> ${employeeBean.branchId} </td>
             <td> ${employeeBean.salary} </td>
-            <td> 
-              <a href="${updateLink}">Update</a> | <a href="${deleteLink}" onclick="if (!(confirm('confirm on delete this employee?'))) return false">Delete</a> 
-            </td>
           </tr>
         </c:forEach>
 
       </table>
     </div>
   </div>
+
 
 </body>
 

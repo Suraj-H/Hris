@@ -117,6 +117,201 @@ public class EmployeeDbUtil {
         return employees;
     }
 
+    // public List<Employee> searchEmployees(Employee employee) throws Exception {
+    // List<Employee> es = new ArrayList<>();
+
+    // Connection con = null;
+    // PreparedStatement ps = null;
+    // ResultSet rs = null;
+
+    // try {
+    // con = gConnection();
+
+    // String salaryQuery =
+
+    // ps = con.prepareStatement(query);
+
+    // // if (employee.getEmployeeId() != 0)
+    // // query = query + "employee_id=" + employee.getEmployeeId();
+
+    // // if (!(employee.getFirstName().equals("")))
+    // // query = query + "first_name=" + employee.getFirstName();
+
+    // // if (!(employee.getLastName().equals("")))
+    // // query = query + "AND last_name=" + employee.getLastName();
+    // // if (!(employee.getState().equals("")))
+    // // query = query + "AND state=" + employee.getState();
+    // // if (!(employee.getCity().equals("")))
+    // // query = query + "AND city=" + employee.getCity();
+    // // if (!(employee.getDateOfBirth().equals("")))
+    // // query = query + "AND date_of_birth=" + employee.getDateOfBirth();
+    // // if (employee.getPhoneNo() != 0)
+    // // query = query + "AND phone_no=" + employee.getPhoneNo();
+    // // if (!(employee.getEmail().equals("")))
+    // // query = query + "AND email=" + employee.getEmail();
+    // // if (!(employee.getQualification().equals("")))
+    // // query = query + "AND qualification=" + employee.getQualification();
+    // // if (!(employee.getPostLevel().equals("")))
+    // // query = query + "AND post_level=" + employee.getPostLevel();
+    // // if (!(employee.getJoiningDate().equals("")))
+    // // query = query + "AND joining_date=" + employee.getJoiningDate();
+    // // if (employee.getDepartmentId() != 0)
+    // // query = query + "AND department_id=" + employee.getDepartmentId();
+    // // if (employee.getBranchId() != 0)
+    // // query = query + "AND branch_id=" + employee.getBranchId();
+    // // if (employee.getSalary() != 0)
+    // // query = query + "AND salary=" + employee.getSalary();
+
+    // ps = con.prepareStatement(query);
+    // rs = ps.executeQuery();
+    // while (rs.next()) {
+    // int employeeId = rs.getInt("employee_id");
+    // String firstName = rs.getString("first_name");
+    // String lastName = rs.getString("last_name");
+    // String state = rs.getString("state");
+    // String city = rs.getString("city");
+    // String dateOfBirth = rs.getString("date_of_birth");
+    // long phoneNo = rs.getLong("phone_no");
+    // String email = rs.getString("email");
+    // String qualification = rs.getString("qualification");
+    // String postLevel = rs.getString("post_level");
+    // String joiningDate = rs.getString("joining_date");
+    // int departmentId = rs.getInt("department_id");
+    // int branchId = rs.getInt("branch_id");
+    // double salary = rs.getDouble("salary");
+
+    // Employee e = new Employee(employeeId, firstName, lastName, state, city,
+    // dateOfBirth, phoneNo, email,
+    // qualification, postLevel, joiningDate, departmentId, branchId, salary);
+
+    // es.add(e);
+    // }
+
+    // } catch (Exception ignored) {
+
+    // } finally {
+    // try {
+    // rs.close();
+    // ps.close();
+    // con.close();
+    // } catch (Exception e) {
+    // }
+    // }
+
+    // return es;
+    // }
+
+    public List<Employee> getQPL(String qual, String pL) throws Exception {
+
+        List<Employee> es = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = gConnection();
+            String query = null;
+            if (qual.length() != 0 && pL.length() != 0) {
+                query = "SELECT * FROM employees WHERE qualification=? AND post_level=?";
+            } else if (qual.length() != 0 && pL.length() == 0) {
+                query = "SELECT * FROM employees WHERE qualification=?";
+            } else if (qual.length() == 0 && pL.length() != 0) {
+                query = "SELECT * FROM employees WHERE post_level=?";
+            }
+
+            ps = con.prepareStatement(query);
+            
+            if (qual.length() != 0 && pL.length() != 0) {
+                ps.setString(1, qual);
+                ps.setString(2, pL);
+            } else if (qual.length() != 0 && pL.length() == 0) {
+                ps.setString(1, qual);
+            } else if (qual.length() == 0 && pL.length() != 0) {
+                ps.setString(1, pL);
+            }
+            
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String state = rs.getString("state");
+                String city = rs.getString("city");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String postLevel = rs.getString("post_level");
+                String joiningDate = rs.getString("joining_date");
+                int departmentId = rs.getInt("department_id");
+                int branchId = rs.getInt("branch_id");
+                double salary = rs.getDouble("salary");
+
+                Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
+                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+
+                es.add(employee);
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return es;
+    }
+
+    public List<Employee> getSalary(String lessThan, String greaterThan, String value) throws Exception {
+
+        List<Employee> es = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = gConnection();
+            String query = "SELECT * FROM employees WHERE salary < ? AND salary > ? ORDER BY salary";
+
+            if (value.equals("A")) {
+                query = query + " ASC";
+            } else if (value.equals("D")) {
+                query = query + " DESC";
+            }
+
+            ps = con.prepareStatement(query);
+            ps.setString(1, lessThan);
+            ps.setString(2, greaterThan);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String state = rs.getString("state");
+                String city = rs.getString("city");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String postLevel = rs.getString("post_level");
+                String joiningDate = rs.getString("joining_date");
+                int departmentId = rs.getInt("department_id");
+                int branchId = rs.getInt("branch_id");
+                double salary = rs.getDouble("salary");
+
+                Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
+                        email, qualification, postLevel, joiningDate, departmentId, branchId, salary);
+
+                es.add(employee);
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return es;
+    }
+
     public Employee getEmployee(int employeeId) throws Exception {
 
         Employee employee = null;

@@ -41,21 +41,21 @@
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-         
+
     <!-- logout servlet -->
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LogoutController</servlet-name>  
+        <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
-    <!-- listEmployee servlet --> 
-    <servlet>  
+    <!-- listEmployee servlet -->
+    <servlet>
         <servlet-name>ListEmployeeController</servlet-name>
-        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class> 
+        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListEmployeeController</servlet-name>
@@ -92,5 +92,24 @@
         <url-pattern>/deleteEmployee</url-pattern>
     </servlet-mapping>
 
+    <!-- searchEmployee servlet -->
+    <servlet> 
+        <servlet-name>SearchEmployeeController</servlet-name>
+        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchEmployeeController</servlet-name>
+        <url-pattern>/searchEmployee</url-pattern>
+    </servlet-mapping>
 
-</web-app>
+    <!-- searchOnCriteria servlet -->
+    <servlet>
+        <servlet-name>FilterEmployeeController</servlet-name>
+        <servlet-class>hris.controller.SearchControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FilterEmployeeController</servlet-name>
+        <url-pattern>/search</url-pattern> 
+    </servlet-mapping> 
+ 
+</web-app>                 
