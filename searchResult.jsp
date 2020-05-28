@@ -118,6 +118,25 @@
               <td> ${employeeBean.salary} </td>
             </tr>
           </c:forEach>
+
+          <c:forEach var="employeeBean" items="${nameList}">  
+            <tr>
+              <td> ${employeeBean.employeeId} </td>
+              <td> ${employeeBean.firstName} </td>
+              <td> ${employeeBean.lastName} </td>
+              <td> ${employeeBean.state} </td>
+              <td> ${employeeBean.city} </td>
+              <td> ${employeeBean.dateOfBirth} </td>
+              <td> ${employeeBean.phoneNo} </td>
+              <td> ${employeeBean.email} </td>
+              <td> ${employeeBean.qualification} </td>
+              <td> ${employeeBean.postLevel} </td>
+              <td> ${employeeBean.joiningDate} </td>
+              <td> ${employeeBean.branchLocation} </td>
+              <td> ${employeeBean.departmentName} </td>
+              <td> ${employeeBean.salary} </td>
+            </tr>
+          </c:forEach>
           
       </table>
     </div>
