@@ -34,6 +34,10 @@ public class SearchControllerServlet extends HttpServlet {
                 case "L":
                     listLocation(request, response);
                     break;
+
+                case "B":
+                    listBD(request, response);
+                    break;
             }
 
         } catch (Exception e) {
@@ -65,6 +69,15 @@ public class SearchControllerServlet extends HttpServlet {
 
         List<Employee> es = new EmployeeDbUtil().getQPL(qualification, postLevel);
         request.setAttribute("qualificationList", es);
+        request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
+    }
+
+    private void listBD(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String branchLocation = request.getParameter("branchLocation");
+        String departmentName = request.getParameter("departmentName");
+
+        List<Employee> es = new EmployeeDbUtil().getBD(branchLocation, departmentName);
+        request.setAttribute("bdList", es);
         request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
     }
 
