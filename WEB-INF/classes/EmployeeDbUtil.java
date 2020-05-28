@@ -285,6 +285,67 @@ public class EmployeeDbUtil {
         return es;
     }
 
+    public List<Employee> getName(String rFirstName, String rLastName) throws Exception {
+
+        List<Employee> es = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = gConnection();
+            String query = qString;
+
+            if (rFirstName.length() != 0 && rLastName.length() != 0) {
+                query = qString + " WHERE first_name=? AND last_name=?";
+            } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
+                query = qString + " WHERE first_name=?";
+            } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
+                query = qString + " WHERE last_name=?";
+            }
+
+            ps = con.prepareStatement(query);
+
+            if (rFirstName.length() != 0 && rLastName.length() != 0) {
+                ps.setString(1, rFirstName);
+                ps.setString(2, rLastName);
+            } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
+                ps.setString(1, rFirstName);
+            } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
+                ps.setString(1, rLastName);
+            }
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String state = rs.getString("state");
+                String city = rs.getString("city");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String postLevel = rs.getString("post_level");
+                String joiningDate = rs.getString("joining_date");
+                String departmentName = rs.getString("department_name");
+                String branchLocation = rs.getString("branch_location");
+                double salary = rs.getDouble("salary");
+
+                Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo,
+                        email, qualification, postLevel, joiningDate, departmentName, branchLocation, salary);
+
+                es.add(employee);
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return es;
+    }
+
     public List<Employee> getSalary(String lessThan, String greaterThan, String value) throws Exception {
 
         List<Employee> es = new ArrayList<>();
