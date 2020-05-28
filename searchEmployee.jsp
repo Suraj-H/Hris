@@ -25,8 +25,7 @@
       <input type="submit" value="Submit">
     </form>
 
-    <br>
-    <hr><br>
+    <br><hr><br>
 
     <form action="/Hris/search" method="GET">
       <input type="hidden" name="command" value="Q">
@@ -47,8 +46,7 @@
         <input type="submit" value="Submit" style="display: block;">
     </form>
 
-    <br>
-    <hr><br>               
+    <br><hr><br>               
 
     <form action="/Hris/search" method="GET">
       <input type="hidden" name="command" value="L">
@@ -81,8 +79,7 @@
       <input type="submit" value="Submit" style="display: block;">
     </form>
 
-    <br>
-    <hr><br>
+    <br><hr><br>
 
     <form action="/Hris/search" method="GET">
       <input type="hidden" name="command" value="B">
@@ -116,8 +113,19 @@
         <input type="submit" value="Submit" style="display: block;">
     </form>
 
+    <br><hr><br>
 
-
+    <form action="/Hris/search" method="GET">
+      <input type="hidden" name="command" value="N">
+      <div class="form-control" style="display: block;">
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName"><br><br>
+        <div class="form-control" style="display: block;">
+          <label for="lastName">Last Name</label>
+          <input type="text" name="lastName"><br>
+        </div><br>
+        <input type="submit" value="Submit" style="display: block;">
+    </form>
 
   </div>
 </body>
