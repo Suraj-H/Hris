@@ -30,6 +30,30 @@ public class Employee {
 
     public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
             long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
+            int branchId, double salary, String username, String password, String departmentName,
+            String branchLocation) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.state = state;
+        this.city = city;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.postLevel = postLevel;
+        this.joiningDate = joiningDate;
+        this.departmentId = departmentId;
+        this.branchId = branchId;
+        this.salary = salary;
+        this.username = username;
+        this.password = password;
+        this.departmentName = departmentName;
+        this.branchLocation = branchLocation;
+    }
+
+    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
+            long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
             int branchId, double salary) {
         this.employeeId = employeeId;
         this.firstName = firstName;
@@ -289,5 +313,8 @@ public class Employee {
     public static String formatString(String str) {
         return (str.substring(0, 1).toUpperCase()).concat(str.substring(1).toLowerCase());
     }
+
+    
+
 
 }
