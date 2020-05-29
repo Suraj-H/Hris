@@ -1,17 +1,17 @@
 package hris.bean;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDbUtil {
     private List<Employee> employees;
     private static Connection con;
-    private String qString = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.branch_id = e.branch_id INNER JOIN department_info d ON d.department_id = e.department_id";
+    private String qString = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, branch_location, department_name, salary FROM employees e INNER JOIN branch_info b ON b.id = e.branch_id INNER JOIN department_info d ON d.id = e.department_id";
 
     public static Connection gConnection() {
         try {
@@ -27,7 +27,7 @@ public class EmployeeDbUtil {
 
         Connection con = null;
         PreparedStatement ps = null;
-        String query = "SELECT * FROM employees WHERE username=? AND password=?";
+        String query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, department_id, branch_id, salary, username, password, branch_location, department_name FROM employees e INNER JOIN branch_info b ON b.id = e.branch_id INNER JOIN department_info d ON d.id = e.department_id WHERE e.username=? AND e.password=?";
         ResultSet rs = null;
         Employee employee = null;
 
@@ -55,9 +55,12 @@ public class EmployeeDbUtil {
                 double salary = rs.getDouble("salary");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
+                String branchLocation = rs.getString("branch_location");
+                String departmentName = rs.getString("department_name");
 
                 employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
-                        qualification, postLevel, joiningDate, departmentId, branchId, salary, username, password);
+                        qualification, postLevel, joiningDate, departmentId, branchId, salary, username, password,
+                        departmentName, branchLocation);
 
                 return employee;
             }
@@ -406,7 +409,7 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "SELECT * FROM employees WHERE employee_id = ?";
+            String query = "SELECT employee_id, first_name, last_name, state, city, date_of_birth, phone_no, email, qualification, post_level, joining_date, department_id, branch_id, salary, branch_location, department_name FROM employees e INNER JOIN branch_info b ON b.id = e.branch_id INNER JOIN department_info d ON d.id = e.department_id WHERE employee_id = ?";
             ps = con.prepareStatement(query);
             ps.setInt(1, employeeId);
             rs = ps.executeQuery();
@@ -425,9 +428,12 @@ public class EmployeeDbUtil {
                 int departmentId = rs.getInt("department_id");
                 int branchId = rs.getInt("branch_id");
                 double salary = rs.getDouble("salary");
+                String branchLocation = rs.getString("branch_location");
+                String departmentName = rs.getString("department_name");
 
                 employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
-                        qualification, postLevel, joiningDate, departmentId, branchId, salary);
+                        qualification, postLevel, joiningDate, departmentId, branchId, salary, departmentName,
+                        branchLocation);
             } else {
                 throw new Exception("Could not find employee with " + employeeId);
             }
