@@ -1,143 +1,94 @@
 package hris.bean;
 
 public class Employee {
-    private int employeeId;
+    private int id;
     private String firstName;
     private String lastName;
-    private String state;
-    private String city;
+    private String address;
+    private int stateId;
+    private String stateName;
+    private int districtId;
+    private String districtName;
     private String dateOfBirth;
     private long phoneNo;
     private String email;
     private String qualification;
-    private String postLevel;
+    private String designation;
     private String joiningDate;
-    private int departmentId;
     private int branchId;
+    private String branchLocation;
+    private int departmentId;
+    private String departmentName;
     private double salary;
     private String username;
     private String password;
-    private String departmentName;
-    private String branchLocation;
 
     public Employee() {
     }
 
+    // validate constructor
     public Employee(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
-            long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
-            int branchId, double salary, String username, String password, String departmentName,
-            String branchLocation) {
-        this.employeeId = employeeId;
+    // login constructor
+    public Employee(int id, String firstName, String lastName, String address, int stateId, String stateName,
+            int districtId, String districtName, String dateOfBirth, long phoneNo, String email, String qualification,
+            String designation, String joiningDate, int branchId, String branchLocation, int departmentId,
+            String departmentName, double salary, String username, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.state = state;
-        this.city = city;
+        this.address = address;
+        this.stateId = stateId;
+        this.stateName = stateName;
+        this.districtId = districtId;
+        this.districtName = districtName;
         this.dateOfBirth = dateOfBirth;
         this.phoneNo = phoneNo;
         this.email = email;
         this.qualification = qualification;
-        this.postLevel = postLevel;
+        this.designation = designation;
         this.joiningDate = joiningDate;
-        this.departmentId = departmentId;
         this.branchId = branchId;
-        this.salary = salary;
-        this.username = username;
-        this.password = password;
-        this.departmentName = departmentName;
         this.branchLocation = branchLocation;
-    }
-
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
-            long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
-            int branchId, double salary) {
-        this.employeeId = employeeId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.state = state;
-        this.city = city;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNo = phoneNo;
-        this.email = email;
-        this.qualification = qualification;
-        this.postLevel = postLevel;
-        this.joiningDate = joiningDate;
         this.departmentId = departmentId;
-        this.branchId = branchId;
-        this.salary = salary;
-    }
-
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
-            long phoneNo, String email, String qualification, String postLevel, String joiningDate,
-            String departmentName, String branchLocation, double salary, String username, String password) {
-        this.employeeId = employeeId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.state = state;
-        this.city = city;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNo = phoneNo;
-        this.email = email;
-        this.qualification = qualification;
-        this.postLevel = postLevel;
-        this.joiningDate = joiningDate;
         this.departmentName = departmentName;
-        this.branchLocation = branchLocation;
         this.salary = salary;
         this.username = username;
         this.password = password;
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
-            long phoneNo, String email, String qualification, String postLevel, String joiningDate, int departmentId,
-            int branchId, double salary, String username, String password) {
-        this.employeeId = employeeId;
+    // add or update employee constructor
+    public Employee(int id, String firstName, String lastName, String address, int stateId, int districtId,
+            String dateOfBirth, long phoneNo, String email, String qualification, String designation,
+            String joiningDate, int branchId, int departmentId, double salary, String username, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.state = state;
-        this.city = city;
+        this.address = address;
+        this.stateId = stateId;
+        this.districtId = districtId;
         this.dateOfBirth = dateOfBirth;
         this.phoneNo = phoneNo;
         this.email = email;
         this.qualification = qualification;
-        this.postLevel = postLevel;
+        this.designation = designation;
         this.joiningDate = joiningDate;
-        this.departmentId = departmentId;
         this.branchId = branchId;
+        this.departmentId = departmentId;
         this.salary = salary;
         this.username = username;
         this.password = password;
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String state, String city, String dateOfBirth,
-            long phoneNo, String email, String qualification, String postLevel, String joiningDate,
-            String departmentName, String branchLocation, double salary) {
-        this.employeeId = employeeId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.state = state;
-        this.city = city;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNo = phoneNo;
-        this.email = email;
-        this.qualification = qualification;
-        this.postLevel = postLevel;
-        this.joiningDate = joiningDate;
-        this.departmentName = departmentName;
-        this.branchLocation = branchLocation;
-        this.salary = salary;
+    public int getId() {
+        return id;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -156,20 +107,44 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getState() {
-        return state;
+    public String getAddress() {
+        return address;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getCity() {
-        return city;
+    public int getStateId() {
+        return stateId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public int getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(int districtId) {
+        this.districtId = districtId;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
     }
 
     public String getDateOfBirth() {
@@ -204,12 +179,12 @@ public class Employee {
         this.qualification = qualification;
     }
 
-    public String getPostLevel() {
-        return postLevel;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setPostLevel(String postLevel) {
-        this.postLevel = postLevel;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public String getJoiningDate() {
@@ -220,6 +195,22 @@ public class Employee {
         this.joiningDate = joiningDate;
     }
 
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getBranchLocation() {
+        return branchLocation;
+    }
+
+    public void setBranchLocation(String branchLocation) {
+        this.branchLocation = branchLocation;
+    }
+
     public int getDepartmentId() {
         return departmentId;
     }
@@ -228,12 +219,12 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
-    public int getBranchId() {
-        return branchId;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setBranchId(int branchId) {
-        this.branchId = branchId;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public double getSalary() {
@@ -260,37 +251,22 @@ public class Employee {
         this.password = password;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public String getBranchLocation() {
-        return branchLocation;
-    }
-
-    public void setBranchLocation(String branchLocation) {
-        this.branchLocation = branchLocation;
-    }
-
     @Override
     public String toString() {
-        return "Employee [branchId=" + branchId + ", city=" + city + ", dateOfBirth=" + dateOfBirth + "departmentId="
-                + departmentId + ", email=" + email + ", employeeId=" + employeeId + ", firstName=" + firstName
-                + ", joiningDate=" + joiningDate + ", lastName=" + lastName + ", password=" + password + ", phoneNo="
-                + phoneNo + ", postLevel=" + postLevel + ", qualification=" + qualification + ", salary=" + salary
-                + "]";
+        return "Employee [address=" + address + ", branchId=" + branchId + ", branchLocation=" + branchLocation
+                + ", dateOfBirth=" + dateOfBirth + ", departmentId=" + departmentId + ", departmentName="
+                + departmentName + ", designation=" + designation + ", districtId=" + districtId + ", districtName="
+                + districtName + ", email=" + email + ", firstName=" + firstName + ", id=" + id + ", joiningDate="
+                + joiningDate + ", lastName=" + lastName + ", password=" + password + ", phoneNo=" + phoneNo
+                + ", qualification=" + qualification + ", salary=" + salary + ", stateId=" + stateId + ", stateName="
+                + stateName + ", username=" + username + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + branchId;
-
+        result = prime * result + id;
         return result;
     }
 
@@ -302,19 +278,14 @@ public class Employee {
             return false;
         if (getClass() != obj.getClass())
             return false;
-
         Employee other = (Employee) obj;
-        if (branchId != other.branchId)
+        if (id != other.id)
             return false;
-
         return true;
     }
 
     public static String formatString(String str) {
         return (str.substring(0, 1).toUpperCase()).concat(str.substring(1).toLowerCase());
     }
-
-    
-
 
 }
