@@ -28,40 +28,40 @@ public class EmployeeControllerServlet extends HttpServlet {
                 command = "LIST";
 
             switch (command) {
-                case "LIST":
-                    listEmployees(request, response);
-                    break;
+                // case "LIST":
+                //     listEmployees(request, response);
+                //     break;
 
                 case "LOGIN":
                     login(request, response);
                     break;
 
-                case "LOGOUT":
-                    logout(request, response);
-                    break;
+                // case "LOGOUT":
+                //     logout(request, response);
+                //     break;
 
-                case "ADD":
-                    addEmployee(request, response);
-                    break;
+                // case "ADD":
+                //     addEmployee(request, response);
+                //     break;
 
-                case "LOAD":
-                    loadEmployee(request, response);
-                    break;
+                // case "LOAD":
+                //     loadEmployee(request, response);
+                //     break;
 
-                case "UPDATE":
-                    updateEmployee(request, response);
-                    break;
+                // case "UPDATE":
+                //     updateEmployee(request, response);
+                //     break;
 
-                case "DELETE":
-                    deleteEmployee(request, response);
-                    break;
+                // case "DELETE":
+                //     deleteEmployee(request, response);
+                //     break;
 
-                case "PROFILE":
-                    employeeProfile(request, response);
-                    break;
+                // case "PROFILE":
+                //     employeeProfile(request, response);
+                //     break;
 
-                default:
-                    listEmployees(request, response);
+                // default:
+                //     listEmployees(request, response);
             }
 
         } catch (Exception e) {
@@ -91,95 +91,93 @@ public class EmployeeControllerServlet extends HttpServlet {
                 request.getSession().setAttribute("eLogin", employee);
                 request.getRequestDispatcher("/user.jsp").forward(request, response);
             }
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        } catch (Exception e) { }
     }
 
-    private void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.getSession().removeAttribute("eLogin");
-        response.sendRedirect("/Hris/index.jsp");
-    }
+    // private void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    //     request.getSession().removeAttribute("eLogin");
+    //     response.sendRedirect("/Hris/index.jsp");
+    // }
 
-    private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    // private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String state = request.getParameter("state");
-        String city = request.getParameter("city");
-        String dateOfBirth = request.getParameter("dateOfBirth");
-        long phoneNo = Long.parseLong(request.getParameter("phoneNo"));
-        String email = request.getParameter("email");
-        String qualification = request.getParameter("qualification");
-        String postLevel = request.getParameter("postLevel");
-        String joiningDate = request.getParameter("joiningDate");
-        int departmentId = Integer.parseInt(request.getParameter("departmentId"));
-        int branchId = Integer.parseInt(request.getParameter("branchId"));
-        double salary = Double.parseDouble(request.getParameter("salary"));
+    //     int employeeId = Integer.parseInt(request.getParameter("employeeId"));
+    //     String firstName = request.getParameter("firstName");
+    //     String lastName = request.getParameter("lastName");
+    //     String state = request.getParameter("state");
+    //     String city = request.getParameter("city");
+    //     String dateOfBirth = request.getParameter("dateOfBirth");
+    //     long phoneNo = Long.parseLong(request.getParameter("phoneNo"));
+    //     String email = request.getParameter("email");
+    //     String qualification = request.getParameter("qualification");
+    //     String postLevel = request.getParameter("postLevel");
+    //     String joiningDate = request.getParameter("joiningDate");
+    //     int departmentId = Integer.parseInt(request.getParameter("departmentId"));
+    //     int branchId = Integer.parseInt(request.getParameter("branchId"));
+    //     double salary = Double.parseDouble(request.getParameter("salary"));
 
-        Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
-                qualification, postLevel, joiningDate, departmentId, branchId, salary);
+    //     Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
+    //             qualification, postLevel, joiningDate, departmentId, branchId, salary);
 
-        new EmployeeDbUtil().updateEmployee(employee);
-        listEmployees(request, response);
-    }
+    //     new EmployeeDbUtil().updateEmployee(employee);
+    //     listEmployees(request, response);
+    // }
 
-    private void loadEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    // private void loadEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-        Employee employee = new EmployeeDbUtil().getEmployee(employeeId);
-        request.setAttribute("eBean", employee);
-        request.getRequestDispatcher("/updateEmployee.jsp").forward(request, response);
-    }
+    //     int employeeId = Integer.parseInt(request.getParameter("employeeId"));
+    //     Employee employee = new EmployeeDbUtil().getEmployee(employeeId);
+    //     request.setAttribute("eBean", employee);
+    //     request.getRequestDispatcher("/updateEmployee.jsp").forward(request, response);
+    // }
 
-    private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    // private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-        new EmployeeDbUtil().deleteEmployee(employeeId);
-        listEmployees(request, response);
-    }
+    //     int employeeId = Integer.parseInt(request.getParameter("employeeId"));
+    //     new EmployeeDbUtil().deleteEmployee(employeeId);
+    //     listEmployees(request, response);
+    // }
 
-    private void listEmployees(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    // private void listEmployees(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        List<Employee> employees = new EmployeeDbUtil().getEmployees();
-        request.setAttribute("employeeList", employees);
+    //     List<Employee> employees = new EmployeeDbUtil().getEmployees();
+    //     request.setAttribute("employeeList", employees);
 
-        request.getRequestDispatcher("/listEmployees.jsp").forward(request, response);
-    }
+    //     request.getRequestDispatcher("/listEmployees.jsp").forward(request, response);
+    // }
 
-    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    // private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String state = request.getParameter("state");
-        String city = request.getParameter("city");
-        String dateOfBirth = request.getParameter("dateOfBirth");
-        long phoneNo = Long.parseLong(request.getParameter("phoneNo"));
-        String email = request.getParameter("email");
-        String qualification = request.getParameter("qualification");
-        String postLevel = request.getParameter("postLevel");
-        String joiningDate = request.getParameter("joiningDate");
-        int departmentId = Integer.parseInt(request.getParameter("departmentId"));
-        int branchId = Integer.parseInt(request.getParameter("branchId"));
-        double salary = Double.parseDouble(request.getParameter("departmentId"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    //     int employeeId = Integer.parseInt(request.getParameter("employeeId"));
+    //     String firstName = request.getParameter("firstName");
+    //     String lastName = request.getParameter("lastName");
+    //     String state = request.getParameter("state");
+    //     String city = request.getParameter("city");
+    //     String dateOfBirth = request.getParameter("dateOfBirth");
+    //     long phoneNo = Long.parseLong(request.getParameter("phoneNo"));
+    //     String email = request.getParameter("email");
+    //     String qualification = request.getParameter("qualification");
+    //     String postLevel = request.getParameter("postLevel");
+    //     String joiningDate = request.getParameter("joiningDate");
+    //     int departmentId = Integer.parseInt(request.getParameter("departmentId"));
+    //     int branchId = Integer.parseInt(request.getParameter("branchId"));
+    //     double salary = Double.parseDouble(request.getParameter("departmentId"));
+    //     String username = request.getParameter("username");
+    //     String password = request.getParameter("password");
 
-        Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
-                qualification, postLevel, joiningDate, departmentId, branchId, salary, username, password);
+    //     Employee employee = new Employee(employeeId, firstName, lastName, state, city, dateOfBirth, phoneNo, email,
+    //             qualification, postLevel, joiningDate, departmentId, branchId, salary, username, password);
 
-        new EmployeeDbUtil().addEmployee(employee);
+    //     new EmployeeDbUtil().addEmployee(employee);
 
-        listEmployees(request, response);
-    }
+    //     listEmployees(request, response);
+    // }
 
-    private void employeeProfile(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-        Employee employee = new EmployeeDbUtil().getEmployee(employeeId);
-        request.setAttribute("eProfile", employee);
-        request.getRequestDispatcher("/profile.jsp").forward(request, response);       
-    }
+    // private void employeeProfile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    //     int employeeId = Integer.parseInt(request.getParameter("employeeId"));
+    //     Employee employee = new EmployeeDbUtil().getEmployee(employeeId);
+    //     request.setAttribute("eProfile", employee);
+    //     request.getRequestDispatcher("/profile.jsp").forward(request, response);       
+    // }
 
 }

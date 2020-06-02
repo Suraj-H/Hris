@@ -52,6 +52,7 @@ function checkLength(input, min, max) {
         showSuccess(input);
 }
 
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 

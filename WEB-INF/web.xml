@@ -112,4 +112,14 @@
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
 
+    <!-- EmployeeProfile servlet -->
+    <servlet>
+        <servlet-name>EmployeeProfileController</servlet-name>
+        <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeProfileController</servlet-name>
+        <url-pattern>/eProfile</url-pattern>
+    </servlet-mapping>
+
 </web-app>
