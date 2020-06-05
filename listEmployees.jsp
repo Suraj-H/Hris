@@ -27,16 +27,15 @@
           <th>Employee Id</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>State</th>
-          <th>City</th>
+          <th>Address</th>
           <th>Date of Birth</th>
           <th>Phone No</th>
           <th>Email</th>
           <th>Qualification</th>
-          <th>Post Level</th>
+          <th>Designation</th>
           <th>Joining Date</th>
-          <th>Branch Location</th>
-          <th>Department Name</th>
+          <th>Branch</th>
+          <th>Department</th>
           <th>Salary</th>
           <th>Action</th>
         </tr>
@@ -45,27 +44,26 @@
           
           <c:url var="updateLink" value="updateEmployee">
             <c:param name="command" value="LOAD" />
-            <c:param name="employeeId" value="${employeeBean.employeeId}" />
+            <c:param name="id" value="${employeeBean.id}" />
           </c:url>
 
           <c:url var="deleteLink" value="updateEmployee">
             <c:param name="command" value="DELETE" />
-            <c:param name="employeeId" value="${employeeBean.employeeId}" />
+            <c:param name="id" value="${employeeBean.id}" />
           </c:url>
         
           <tr>
-            <td> ${employeeBean.employeeId} </td>
+            <td> ${employeeBean.id} </td>
             <td> ${employeeBean.firstName} </td>
             <td> ${employeeBean.lastName} </td>
-            <td> ${employeeBean.state} </td>
-            <td> ${employeeBean.city} </td>
+            <td> ${employeeBean.address} </td>
             <td> ${employeeBean.dateOfBirth} </td>
             <td> ${employeeBean.phoneNo} </td>
             <td> ${employeeBean.email} </td>
             <td> ${employeeBean.qualification} </td>
-            <td> ${employeeBean.postLevel} </td>
+            <td> ${employeeBean.designation} </td>
             <td> ${employeeBean.joiningDate} </td>
-            <td> ${employeeBean.branchLocation} </td>
+            <td> ${employeeBean.branchAddress}, ${employeeBean.branchLocation}  </td>
             <td> ${employeeBean.departmentName} </td>
             <td> ${employeeBean.salary} </td>
             <td> 
