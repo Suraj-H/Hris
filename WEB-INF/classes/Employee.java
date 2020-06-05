@@ -1,14 +1,13 @@
 package hris.bean;
 
+import java.util.Map;
+
 public class Employee {
+    private Map<String, String> searchObj;
     private int id;
     private String firstName;
     private String lastName;
     private String address;
-    private int stateId;
-    private String stateName;
-    private int districtId;
-    private String districtName;
     private String dateOfBirth;
     private long phoneNo;
     private String email;
@@ -16,6 +15,7 @@ public class Employee {
     private String designation;
     private String joiningDate;
     private int branchId;
+    private String branchAddress;
     private String branchLocation;
     private int departmentId;
     private String departmentName;
@@ -33,18 +33,14 @@ public class Employee {
     }
 
     // login constructor
-    public Employee(int id, String firstName, String lastName, String address, int stateId, String stateName,
-            int districtId, String districtName, String dateOfBirth, long phoneNo, String email, String qualification,
-            String designation, String joiningDate, int branchId, String branchLocation, int departmentId,
-            String departmentName, double salary, String username, String password) {
+    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
+            String email, String qualification, String designation, String joiningDate, int branchId,
+            String branchAddress, String branchLocation, int departmentId, String departmentName, double salary,
+            String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.stateId = stateId;
-        this.stateName = stateName;
-        this.districtId = districtId;
-        this.districtName = districtName;
         this.dateOfBirth = dateOfBirth;
         this.phoneNo = phoneNo;
         this.email = email;
@@ -53,6 +49,7 @@ public class Employee {
         this.joiningDate = joiningDate;
         this.branchId = branchId;
         this.branchLocation = branchLocation;
+        this.branchAddress = branchAddress;
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.salary = salary;
@@ -60,16 +57,33 @@ public class Employee {
         this.password = password;
     }
 
-    // add or update employee constructor
-    public Employee(int id, String firstName, String lastName, String address, int stateId, int districtId,
-            String dateOfBirth, long phoneNo, String email, String qualification, String designation,
-            String joiningDate, int branchId, int departmentId, double salary, String username, String password) {
+    // update employee constructor
+    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
+            String email, String qualification, String designation, String joiningDate, int branchId, 
+            int departmentId, double salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.stateId = stateId;
-        this.districtId = districtId;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.designation = designation;
+        this.joiningDate = joiningDate;
+        this.branchId = branchId;
+        this.departmentId = departmentId;
+        this.salary = salary;
+    }
+
+    // add employee constructor
+    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
+            String email, String qualification, String designation, String joiningDate, int branchId, int departmentId,
+            double salary, String username, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.phoneNo = phoneNo;
         this.email = email;
@@ -81,6 +95,26 @@ public class Employee {
         this.salary = salary;
         this.username = username;
         this.password = password;
+    }
+
+    // list employees constructor
+    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
+            String email, String qualification, String designation, String joiningDate, String branchAddress,
+            String branchLocation, String departmentName, double salary) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.designation = designation;
+        this.joiningDate = joiningDate;
+        this.branchAddress = branchAddress;
+        this.branchLocation = branchLocation;
+        this.departmentName = departmentName;
+        this.salary = salary;
     }
 
     public int getId() {
@@ -113,38 +147,6 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getStateId() {
-        return stateId;
-    }
-
-    public void setStateId(int stateId) {
-        this.stateId = stateId;
-    }
-
-    public String getStateName() {
-        return stateName;
-    }
-
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
-
-    public int getDistrictId() {
-        return districtId;
-    }
-
-    public void setDistrictId(int districtId) {
-        this.districtId = districtId;
-    }
-
-    public String getDistrictName() {
-        return districtName;
-    }
-
-    public void setDistrictName(String districtName) {
-        this.districtName = districtName;
     }
 
     public String getDateOfBirth() {
@@ -211,6 +213,14 @@ public class Employee {
         this.branchLocation = branchLocation;
     }
 
+    public String getBranchAddress() {
+        return branchAddress;
+    }
+
+    public void setBranchAddress(String branchAddress) {
+        this.branchAddress = branchAddress;
+    }
+
     public int getDepartmentId() {
         return departmentId;
     }
@@ -251,15 +261,21 @@ public class Employee {
         this.password = password;
     }
 
+    public Map<String, String> getSearchObj() {
+        return searchObj;
+    }
+
+    public void setSearchObj(Map<String, String> searchObj) {
+        this.searchObj = searchObj;
+    }
+
     @Override
     public String toString() {
         return "Employee [address=" + address + ", branchId=" + branchId + ", branchLocation=" + branchLocation
                 + ", dateOfBirth=" + dateOfBirth + ", departmentId=" + departmentId + ", departmentName="
-                + departmentName + ", designation=" + designation + ", districtId=" + districtId + ", districtName="
-                + districtName + ", email=" + email + ", firstName=" + firstName + ", id=" + id + ", joiningDate="
-                + joiningDate + ", lastName=" + lastName + ", password=" + password + ", phoneNo=" + phoneNo
-                + ", qualification=" + qualification + ", salary=" + salary + ", stateId=" + stateId + ", stateName="
-                + stateName + ", username=" + username + "]";
+                + departmentName + ", designation=" + designation + ", email=" + email + ", firstName=" + firstName
+                + ", id=" + id + ", joiningDate=" + joiningDate + ", lastName=" + lastName + ", phoneNo=" + phoneNo
+                + ", qualification=" + qualification + ", salary=" + salary + "]";
     }
 
     @Override
@@ -287,5 +303,7 @@ public class Employee {
     public static String formatString(String str) {
         return (str.substring(0, 1).toUpperCase()).concat(str.substring(1).toLowerCase());
     }
+
+    
 
 }
