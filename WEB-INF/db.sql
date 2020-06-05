@@ -518,3 +518,24 @@ CREATE TABLE `work_info` (
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `work_info_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `auth_info`;
+
+CREATE TABLE `auth_info` (
+  `id` int NOT NULL,
+  `employee_id` int NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `access_level` char(8) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `auth_info_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+CREATE USER 'guest' @'localhost' IDENTIFIED BY 'surajh';
+
+GRANT
+SELECT
+  ON hris_db.* TO `guest` @`localhost`;
+
+FLUSH PRIVILEGES;
