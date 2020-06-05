@@ -14,7 +14,7 @@
     <form action="/Hris/updateEmployee" method="GET" id="form" class="form">
 
       <input type="hidden" name="command" value="UPDATE">
-      <input type="hidden" name="employeeId" value="${eBean.employeeId}">
+      <input type="hidden" name="id" value="${eBean.id}">
 
       <div class="form-control">
         <input type="text" name="firstName" id="firstName" value="${eBean.firstName}" placeholder="Enter first name">
@@ -23,10 +23,7 @@
         <input type="text" name="lastName" id="lastName" value="${eBean.lastName}" placeholder="Enter last name">
       </div>
       <div class="form-control">
-        <input type="text" name="state" id="state" value="${eBean.state}" placeholder="Enter state">
-      </div>
-      <div class="form-control">
-        <input type="text" name="city" id="city" value="${eBean.city}" placeholder="Enter city">
+        <input type="text" name="address" id="state" value="${eBean.address}" placeholder="Enter address">
       </div>
       <div class="form-control">
         <input type="text" name="dateOfBirth" id="dateOfBirth" value="${eBean.dateOfBirth}"
@@ -43,7 +40,7 @@
           placeholder="Enter qualification">
       </div>
       <div class="form-control">
-        <input type="text" name="postLevel" id="postLevel" value="${eBean.postLevel}" placeholder="Enter post level">
+        <input type="text" name="designation" id="designation" value="${eBean.designation}" placeholder="Enter designation">
       </div>
       <div class="form-control">
         <input type="text" name="joiningDate" id="joiningDate" value="${eBean.joiningDate}"
