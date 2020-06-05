@@ -44,8 +44,19 @@ public class SearchControllerServlet extends HttpServlet {
                     break;
             }
 
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
 
+    }
+
+    private void listSalary(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String lessThan = request.getParameter("lessThan");
+        String greaterThan = request.getParameter("greaterThan");
+        String value = request.getParameter("command");
+        
+        List<Employee> es = new EmployeeDbUtil().getSalary(lessThan, greaterThan, value);
+        request.setAttribute("salaryList", es);
+        request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
     }
 
     private void listLocation(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -54,15 +65,6 @@ public class SearchControllerServlet extends HttpServlet {
         List<Employee> es = new EmployeeDbUtil().getLocation(state, city);
         request.setAttribute("locationList", es);
         request.setAttribute("search", "locationList");
-        request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
-    }
-
-    private void listSalary(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String lessThan = request.getParameter("lessThan");
-        String greaterThan = request.getParameter("greaterThan");
-        String value = request.getParameter("command");
-        List<Employee> es = new EmployeeDbUtil().getSalary(lessThan, greaterThan, value);
-        request.setAttribute("salaryList", es);
         request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
     }
 
