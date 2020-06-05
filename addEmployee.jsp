@@ -14,7 +14,7 @@
     <form action="/Hris/addEmployee" method="GET" id="form" class="form">
       <input type="hidden" name="command" value="ADD">
       <div class="form-control">
-        <input type="text" name="employeeId" id="employeeId" placeholder="Enter employee id">
+        <input type="text" name="id" id="id" placeholder="Enter id">
       </div>
       <div class="form-control">
         <input type="text" name="firstName" id="firstName" placeholder="Enter first name">
@@ -23,10 +23,7 @@
         <input type="text" name="lastName" id="lastName" placeholder="Enter last name">
       </div>
       <div class="form-control">
-        <input type="text" name="state" id="state" placeholder="Enter state">
-      </div>
-      <div class="form-control">
-        <input type="text" name="city" id="city" placeholder="Enter city">
+        <input type="text" name="address" id="address" placeholder="Enter address">
       </div>
       <div class="form-control">
         <input type="text" name="dateOfBirth" id="dateOfBirth" placeholder="Enter date of birth">
@@ -41,7 +38,7 @@
         <input type="text" name="qualification" id="qualification" placeholder="Enter qualification">
       </div>
       <div class="form-control">
-        <input type="text" name="postLevel" id="postLevel" placeholder="Enter post level">
+        <input type="text" name="designation" id="designation" placeholder="Enter designation">
       </div>
       <div class="form-control">
         <input type="text" name="joiningDate" id="joiningDate" placeholder="Enter joining date">
