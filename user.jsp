@@ -14,7 +14,7 @@
       <input type="button" value="Home" onclick="window.location.href='index.jsp; return false;'">
       <form action="/Hris/eProfile" method="GET">
         <input type="hidden" name="command" value="PROFILE">
-        <input type="hidden" name="employeeId" value="${eLogin.employeeId}">
+        <input type="hidden" name="id" value="${eLogin.id}">
         <input type="submit" value="Profile">
       </form>
       <input type="button" value="List Employee" onclick="window.location.href='/Hris/listEmployees'">
