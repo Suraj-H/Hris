@@ -378,69 +378,73 @@ public class EmployeeDbUtil {
         return es;
     }
 
-    // public List<Employee> getName(String rFirstName, String rLastName) throws
-    // Exception {
+    public List<Employee> getName(String rId, String rFirstName, String rLastName) throws Exception {
 
-    // List<Employee> es = new ArrayList<>();
-    // Connection con = null;
-    // PreparedStatement ps = null;
-    // ResultSet rs = null;
+        List<Employee> es = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-    // try {
-    // con = gConnection();
-    // String query = qString;
+        try {
+            con = gConnection();
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id";
 
-    // if (rFirstName.length() != 0 && rLastName.length() != 0) {
-    // query = qString + " WHERE first_name=? AND last_name=?";
-    // } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
-    // query = qString + " WHERE first_name=?";
-    // } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
-    // query = qString + " WHERE last_name=?";
-    // }
+            if (rId.length() != 0) {
+                query = query + " WHERE id=?";
+            } else {
+                if (rFirstName.length() != 0 && rLastName.length() != 0) {
+                    query = qString + " WHERE first_name=? AND last_name=?";
+                } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
+                    query = qString + " WHERE first_name=?";
+                } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
+                    query = qString + " WHERE last_name=?";
+                }
+            }
 
-    // ps = con.prepareStatement(query);
+            ps = con.prepareStatement(query);
 
-    // if (rFirstName.length() != 0 && rLastName.length() != 0) {
-    // ps.setString(1, rFirstName);
-    // ps.setString(2, rLastName);
-    // } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
-    // ps.setString(1, rFirstName);
-    // } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
-    // ps.setString(1, rLastName);
-    // }
+            if (rId.length() != 0) {
+                ps.setInt(1, Integer.parseInt(rId));
+            } else {
+                if (rFirstName.length() != 0 && rLastName.length() != 0) {
+                    ps.setString(1, rFirstName);
+                    ps.setString(2, rLastName);
+                } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
+                    ps.setString(1, rFirstName);
+                } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
+                    ps.setString(1, rLastName);
+                }
+            }
 
-    // rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
-    // while (rs.next()) {
-    // int employeeId = rs.getInt("employee_id");
-    // String firstName = rs.getString("first_name");
-    // String lastName = rs.getString("last_name");
-    // String state = rs.getString("state");
-    // String city = rs.getString("city");
-    // String dateOfBirth = rs.getString("date_of_birth");
-    // long phoneNo = rs.getLong("phone_no");
-    // String email = rs.getString("email");
-    // String qualification = rs.getString("qualification");
-    // String designation = rs.getString("designation");
-    // String joiningDate = rs.getString("joining_date");
-    // String departmentName = rs.getString("department_name");
-    // String branchLocation = rs.getString("branch_location");
-    // double salary = rs.getDouble("salary");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String address = rs.getString("address");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String designation = rs.getString("designation");
+                String joiningDate = rs.getString("joining_date");
+                String branchAddress = rs.getString("b_address");
+                String branchLocation = rs.getString("location");
+                String departmentName = rs.getString("name");
+                double salary = rs.getDouble("salary");
 
-    // Employee employee = new Employee(employeeId, firstName, lastName, state,
-    // city, dateOfBirth, phoneNo,
-    // email, qualification, designation, joiningDate, departmentName,
-    // branchLocation, salary);
+                Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email,
+                        qualification, designation, joiningDate, branchAddress, branchLocation, departmentName, salary);
 
-    // es.add(employee);
-    // }
+                es.add(employee);
+            }
 
-    // } catch (Exception e) {
-    // // TODO: handle exception
-    // }
+        } catch (Exception e) {
+        }
 
-    // return es;
-    // }
+        return es;
+    }
 
     public List<Employee> getSalary(String lessThan, String greaterThan, String value) throws Exception {
 
