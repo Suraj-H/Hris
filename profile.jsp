@@ -13,7 +13,7 @@
 
       <tr>
         <td>Id</td>
-        <td> ${eLogin.employeeId} </td>
+        <td> ${eLogin.id} </td>
       </tr>
       <tr>
         <td>First Name</td>
@@ -25,11 +25,7 @@
       </tr>
       <tr>
         <td>State</td>
-        <td> ${eLogin.state} </td>
-      </tr>
-      <tr>
-        <td>City</td>
-        <td> ${eLogin.city} </td>
+        <td> ${eLogin.address} </td>
       </tr>
       <tr>
         <td>Date Of Birth</td>
@@ -49,19 +45,19 @@
       </tr>
       <tr>
         <td>Designation</td>
-        <td> ${eLogin.postLevel} </td>
+        <td> ${eLogin.designation} </td>
       </tr>
       <tr>
         <td>Joining Date</td>
         <td> ${eLogin.joiningDate} </td>
       </tr>
       <tr>
-        <td>Branch Location</td>
-        <td> ${eLogin.branchLocation} </td>
+        <td>Branch</td>
+        <td> ${eLogin.branchId}, ${eLogin.branchAddress}, ${eLogin.branchLocation} </td>
       </tr>
       <tr>
-        <td>Department Name</td>
-        <td> ${eLogin.departmentName} </td>
+        <td>Department</td>
+        <td> ${eLogin.departmentId}, ${eLogin.departmentName} </td>
       </tr>
       <tr>
         <td>Salary</td>
