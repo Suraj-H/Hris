@@ -35,9 +35,9 @@ public class SearchControllerServlet extends HttpServlet {
                     listBD(request, response);
                     break;
 
-                // case "N":
-                // listName(request, response);
-                // break;
+                case "N":
+                    listName(request, response);
+                    break;
             }
 
         } catch (Exception e) {
@@ -74,19 +74,19 @@ public class SearchControllerServlet extends HttpServlet {
         request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
     }
 
-    // private void listName(HttpServletRequest request, HttpServletResponse
-    // response) throws Exception {
-    // String firstName = request.getParameter("firstName");
-    // String lastName = request.getParameter("lastName");
+    private void listName(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String id = request.getParameter("id");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
 
-    // if (firstName.length() != 0)
-    // firstName = Employee.formatString(firstName);
-    // if (lastName.length() != 0)
-    // lastName = Employee.formatString(lastName);
+        if (firstName.length() != 0)
+            firstName = Employee.formatString(firstName);
+        if (lastName.length() != 0)
+            lastName = Employee.formatString(lastName);
 
-    // List<Employee> es = new EmployeeDbUtil().getName(firstName, lastName);
-    // request.setAttribute("nameList", es);
-    // request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
-    // }
+        List<Employee> es = new EmployeeDbUtil().getName(id, firstName, lastName);
+        request.setAttribute("nameList", es);
+        request.getRequestDispatcher("/searchResult.jsp").forward(request, response);
+    }
 
 }
