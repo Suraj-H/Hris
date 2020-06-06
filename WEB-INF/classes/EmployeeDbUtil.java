@@ -251,180 +251,132 @@ public class EmployeeDbUtil {
     }
 
     /* search filter */
-    // public List<Employee> getLocation(String rState, String rCity) throws
-    // Exception {
 
-    // List<Employee> es = new ArrayList<>();
-    // Connection con = null;
-    // PreparedStatement ps = null;
-    // ResultSet rs = null;
+    public List<Employee> getQPL(String qual, String pL) throws Exception {
 
-    // try {
-    // con = gConnection();
-    // String query = qString + " WHERE state=? AND city=?";
+        List<Employee> es = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-    // ps = con.prepareStatement(query);
-    // ps.setString(1, rState);
-    // ps.setString(2, rCity);
+        try {
+            con = gConnection();
+            String query = qString;
 
-    // rs = ps.executeQuery();
+            if (qual.length() != 0 && pL.length() != 0) {
+                query = qString + " WHERE qualification=? AND designation=?";
+            } else if (qual.length() != 0 && pL.length() == 0) {
+                query = qString + " WHERE qualification=?";
+            } else if (qual.length() == 0 && pL.length() != 0) {
+                query = qString + " WHERE designation=?";
+            }
 
-    // while (rs.next()) {
-    // int employeeId = rs.getInt("employee_id");
-    // String firstName = rs.getString("first_name");
-    // String lastName = rs.getString("last_name");
-    // String state = rs.getString("state");
-    // String city = rs.getString("city");
-    // String dateOfBirth = rs.getString("date_of_birth");
-    // long phoneNo = rs.getLong("phone_no");
-    // String email = rs.getString("email");
-    // String qualification = rs.getString("qualification");
-    // String designation = rs.getString("designation");
-    // String joiningDate = rs.getString("joining_date");
-    // String departmentName = rs.getString("department_name");
-    // String branchLocation = rs.getString("branch_location");
-    // double salary = rs.getDouble("salary");
+            ps = con.prepareStatement(query);
 
-    // Employee employee = new Employee(employeeId, firstName, lastName, state,
-    // city, dateOfBirth, phoneNo,
-    // email, qualification, designation, joiningDate, departmentName,
-    // branchLocation, salary);
+            if (qual.length() != 0 && pL.length() != 0) {
+                ps.setString(1, qual);
+                ps.setString(2, pL);
+            } else if (qual.length() != 0 && pL.length() == 0) {
+                ps.setString(1, qual);
+            } else if (qual.length() == 0 && pL.length() != 0) {
+                ps.setString(1, pL);
+            }
 
-    // es.add(employee);
-    // }
+            rs = ps.executeQuery();
 
-    // } catch (Exception ignored) {
-    // }
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String address = rs.getString("address");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String designation = rs.getString("designation");
+                String joiningDate = rs.getString("joining_date");
+                String departmentName = rs.getString("name");
+                String branchAddress = rs.getString("b_address");
+                String branchLocation = rs.getString("location");
+                double salary = rs.getDouble("salary");
 
-    // return es;
-    // }
+                Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email,
+                        qualification, designation, joiningDate, branchAddress, branchLocation, departmentName, salary);
 
-    // public List<Employee> getQPL(String qual, String pL) throws Exception {
+                es.add(employee);
+            }
 
-    // List<Employee> es = new ArrayList<>();
-    // Connection con = null;
-    // PreparedStatement ps = null;
-    // ResultSet rs = null;
+        } catch (Exception e) {
+        }
 
-    // try {
-    // con = gConnection();
-    // String query = qString;
+        return es;
+    }
 
-    // if (qual.length() != 0 && pL.length() != 0) {
-    // query = qString + " WHERE qualification=? AND designation=?";
-    // } else if (qual.length() != 0 && pL.length() == 0) {
-    // query = qString + " WHERE qualification=?";
-    // } else if (qual.length() == 0 && pL.length() != 0) {
-    // query = qString + " WHERE designation=?";
-    // }
+    public List<Employee> getBD(String rBranchId, String rBranchLocation, String rDepartmentName) throws Exception {
 
-    // ps = con.prepareStatement(query);
+        List<Employee> es = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-    // if (qual.length() != 0 && pL.length() != 0) {
-    // ps.setString(1, qual);
-    // ps.setString(2, pL);
-    // } else if (qual.length() != 0 && pL.length() == 0) {
-    // ps.setString(1, qual);
-    // } else if (qual.length() == 0 && pL.length() != 0) {
-    // ps.setString(1, pL);
-    // }
+        try {
+            con = gConnection();
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id";
 
-    // rs = ps.executeQuery();
+            if (rBranchId.length() != 0) {
+                query = query + " WHERE branch_id = ?";
+                ps = con.prepareStatement(query);
+                ps.setInt(1, Integer.parseInt(rBranchId));
+            } else {
+                if (rBranchLocation.length() != 0 && rDepartmentName.length() != 0) {
+                    query = qString + " WHERE location=? AND name=?";
+                } else if (rBranchLocation.length() != 0 && rDepartmentName.length() == 0) {
+                    query = qString + " WHERE location=?";
+                } else if (rBranchLocation.length() == 0 && rDepartmentName.length() != 0) {
+                    query = qString + " WHERE name=?";
+                }
 
-    // while (rs.next()) {
-    // int employeeId = rs.getInt("employee_id");
-    // String firstName = rs.getString("first_name");
-    // String lastName = rs.getString("last_name");
-    // String state = rs.getString("state");
-    // String city = rs.getString("city");
-    // String dateOfBirth = rs.getString("date_of_birth");
-    // long phoneNo = rs.getLong("phone_no");
-    // String email = rs.getString("email");
-    // String qualification = rs.getString("qualification");
-    // String designation = rs.getString("designation");
-    // String joiningDate = rs.getString("joining_date");
-    // String departmentName = rs.getString("department_name");
-    // String branchLocation = rs.getString("branch_location");
-    // double salary = rs.getDouble("salary");
+                ps = con.prepareStatement(query);
 
-    // Employee employee = new Employee(employeeId, firstName, lastName, state,
-    // city, dateOfBirth, phoneNo,
-    // email, qualification, designation, joiningDate, departmentName,
-    // branchLocation, salary);
+                if (rBranchLocation.length() != 0 && rDepartmentName.length() != 0) {
+                    ps.setString(1, rBranchLocation);
+                    ps.setString(2, rDepartmentName);
+                } else if (rBranchLocation.length() != 0 && rDepartmentName.length() == 0) {
+                    ps.setString(1, rBranchLocation);
+                } else if (rBranchLocation.length() == 0 && rDepartmentName.length() != 0) {
+                    ps.setString(1, rDepartmentName);
+                }
+            }
 
-    // es.add(employee);
-    // }
+            rs = ps.executeQuery();
 
-    // } catch (Exception e) {
-    // // TODO: handle exception
-    // }
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String address = rs.getString("address");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String designation = rs.getString("designation");
+                String joiningDate = rs.getString("joining_date");
+                String branchAddress = rs.getString("b_address");
+                String branchLocation = rs.getString("location");
+                String departmentName = rs.getString("name");
+                double salary = rs.getDouble("salary");
 
-    // return es;
-    // }
+                Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email,
+                        qualification, designation, joiningDate, branchAddress, branchLocation, departmentName, salary);
 
-    // public List<Employee> getBD(String rBranch, String rDepartment) throws
-    // Exception {
+                es.add(employee);
+            }
 
-    // List<Employee> es = new ArrayList<>();
-    // Connection con = null;
-    // PreparedStatement ps = null;
-    // ResultSet rs = null;
+        } catch (Exception e) {
+        }
 
-    // try {
-    // con = gConnection();
-    // String query = qString;
-
-    // if (rBranch.length() != 0 && rDepartment.length() != 0) {
-    // query = qString + " WHERE branch_location=? AND department_name=?";
-    // } else if (rBranch.length() != 0 && rDepartment.length() == 0) {
-    // query = qString + " WHERE branch_location=?";
-    // } else if (rBranch.length() == 0 && rDepartment.length() != 0) {
-    // query = qString + " WHERE department_name=?";
-    // }
-
-    // ps = con.prepareStatement(query);
-
-    // if (rBranch.length() != 0 && rDepartment.length() != 0) {
-    // ps.setString(1, rBranch);
-    // ps.setString(2, rDepartment);
-    // } else if (rBranch.length() != 0 && rDepartment.length() == 0) {
-    // ps.setString(1, rBranch);
-    // } else if (rBranch.length() == 0 && rDepartment.length() != 0) {
-    // ps.setString(1, rDepartment);
-    // }
-
-    // rs = ps.executeQuery();
-
-    // while (rs.next()) {
-    // int employeeId = rs.getInt("employee_id");
-    // String firstName = rs.getString("first_name");
-    // String lastName = rs.getString("last_name");
-    // String state = rs.getString("state");
-    // String city = rs.getString("city");
-    // String dateOfBirth = rs.getString("date_of_birth");
-    // long phoneNo = rs.getLong("phone_no");
-    // String email = rs.getString("email");
-    // String qualification = rs.getString("qualification");
-    // String designation = rs.getString("designation");
-    // String joiningDate = rs.getString("joining_date");
-    // String departmentName = rs.getString("department_name");
-    // String branchLocation = rs.getString("branch_location");
-    // double salary = rs.getDouble("salary");
-
-    // Employee employee = new Employee(employeeId, firstName, lastName, state,
-    // city, dateOfBirth, phoneNo,
-    // email, qualification, designation, joiningDate, departmentName,
-    // branchLocation, salary);
-
-    // es.add(employee);
-    // }
-
-    // } catch (Exception e) {
-    // // TODO: handle exception
-    // }
-
-    // return es;
-    // }
+        return es;
+    }
 
     // public List<Employee> getName(String rFirstName, String rLastName) throws
     // Exception {
@@ -499,17 +451,18 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = qString + " WHERE salary < ? AND salary > ? ORDER BY salary";
+            // String query = qString + " WHERE salary < ? AND salary > ? ORDER BY salary";
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id WHERE salary < ? AND salary > ? ORDER BY salary";
 
-            if (value.equals("A")) {
-                query = query + " ASC";
-            } else if (value.equals("D")) {
-                query = query + " DESC";
-            }
+            // if (value.equals("A")) {
+            // query = query + " ASC";
+            // } else if (value.equals("D")) {
+            // query = query + " DESC";
+            // }
 
             ps = con.prepareStatement(query);
-            ps.setString(1, lessThan);
-            ps.setString(2, greaterThan);
+            ps.setDouble(1, Double.parseDouble(lessThan));
+            ps.setDouble(2, Double.parseDouble(greaterThan));
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -523,22 +476,22 @@ public class EmployeeDbUtil {
                 String qualification = rs.getString("qualification");
                 String designation = rs.getString("designation");
                 String joiningDate = rs.getString("joining_date");
+                String departmentName = rs.getString("name");
                 String branchAddress = rs.getString("b_address");
                 String branchLocation = rs.getString("location");
-                String departmentName = rs.getString("name");
                 double salary = rs.getDouble("salary");
 
                 Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email,
                         qualification, designation, joiningDate, branchAddress, branchLocation, departmentName, salary);
 
                 es.add(employee);
-                
-                return es;
+
             }
 
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
 
-        return null;
+        return es;
 
     }
 
