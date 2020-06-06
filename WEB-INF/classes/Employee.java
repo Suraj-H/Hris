@@ -304,6 +304,27 @@ public class Employee {
         return (str.substring(0, 1).toUpperCase()).concat(str.substring(1).toLowerCase());
     }
 
+    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
+            String email, String qualification, String designation, String joiningDate, int branchId,
+            String branchAddress, String branchLocation, int departmentId, String departmentName, double salary) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.designation = designation;
+        this.joiningDate = joiningDate;
+        this.branchId = branchId;
+        this.branchAddress = branchAddress;
+        this.branchLocation = branchLocation;
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.salary = salary;
+    }
+
     
 
 }

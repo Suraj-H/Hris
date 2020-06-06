@@ -74,6 +74,52 @@ public class EmployeeDbUtil {
         return null;
     }
 
+    public Employee getProfile(int id) throws Exception {
+
+        Employee employee = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = gConnection();
+            String query = "SELECT first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, branch_id, b_address, location, department_id, name, salary employees INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id WHERE id=?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String address = rs.getString("address");
+                String dateOfBirth = rs.getString("date_of_birth");
+                long phoneNo = rs.getLong("phone_no");
+                String email = rs.getString("email");
+                String qualification = rs.getString("qualification");
+                String designation = rs.getString("designation");
+                String joiningDate = rs.getString("joining_date");
+                int branchId = rs.getInt("branch_id");
+                String branchAddress = rs.getString("b_address");
+                String branchLocation = rs.getString("location");
+                int departmentId = rs.getInt("department_id");
+                String departmentName = rs.getString("name");
+                double salary = rs.getDouble("salary");
+
+                employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email, qualification,
+                        designation, joiningDate, branchId, branchAddress, branchLocation, departmentId, departmentName,
+                        salary);
+
+                return employee;
+            }
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
+        }
+        
+        return null;
+    }
+
     public List<Employee> getEmployees() throws Exception {
         employees = new ArrayList<>();
         Connection con = null;

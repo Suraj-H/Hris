@@ -119,7 +119,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeProfileController</servlet-name>
-        <url-pattern>/eProfile</url-pattern>
-    </servlet-mapping>
-  
-</web-app>     
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>  
+        
+</web-app>          

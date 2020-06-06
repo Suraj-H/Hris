@@ -40,7 +40,8 @@
           placeholder="Enter qualification">
       </div>
       <div class="form-control">
-        <input type="text" name="designation" id="designation" value="${eBean.designation}" placeholder="Enter designation">
+        <input type="text" name="designation" id="designation" value="${eBean.designation}"
+          placeholder="Enter designation">
       </div>
       <div class="form-control">
         <input type="text" name="joiningDate" id="joiningDate" value="${eBean.joiningDate}"
