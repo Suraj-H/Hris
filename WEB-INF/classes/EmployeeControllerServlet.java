@@ -56,10 +56,6 @@ public class EmployeeControllerServlet extends HttpServlet {
                     deleteEmployee(request, response);
                     break;
 
-                // case "PROFILE":
-                // employeeProfile(request, response);
-                // break;
-
                 default:
                     listEmployees(request, response);
             }
@@ -154,20 +150,12 @@ public class EmployeeControllerServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email,
-                qualification, designation, joiningDate, departmentId, branchId, salary, username, password);
+        Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email, qualification,
+                designation, joiningDate, departmentId, branchId, salary, username, password);
 
         new EmployeeDbUtil().addEmployee(employee);
 
         listEmployees(request, response);
     }
-
-    // private void employeeProfile(HttpServletRequest request, HttpServletResponse
-    // response) throws Exception {
-    // int employeeId = Integer.parseInt(request.getParameter("employeeId"));
-    // Employee employee = new EmployeeDbUtil().getEmployee(employeeId);
-    // request.setAttribute("eProfile", employee);
-    // request.getRequestDispatcher("/profile.jsp").forward(request, response);
-    // }
 
 }
