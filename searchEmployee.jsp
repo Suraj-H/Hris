@@ -105,6 +105,10 @@
     <form action="/Hris/search" method="GET">
       <input type="hidden" name="command" value="N">
       <div class="form-control" style="display: block;">
+        <label for="id">Employee Id</label>
+        <input type="text" name="id">
+      </div><br>
+      <div class="form-control" style="display: block;">
         <label for="firstName">First Name</label>
         <input type="text" name="firstName"><br><br>
         <div class="form-control" style="display: block;">
