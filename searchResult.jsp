@@ -30,33 +30,31 @@
           <th>Employee Id</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>State</th>
-          <th>City</th>
+          <th>Address</th>
           <th>Date of Birth</th>
           <th>Phone No</th>
           <th>Email</th>
           <th>Qualification</th>
-          <th>Post Level</th>
+          <th>Designation</th>
           <th>Joining Date</th>
-          <th>Branch Location</th>
-          <th>Department Name</th>
+          <th>Branch</th>
+          <th>Department</th>
           <th>Salary</th>
         </tr>
 
           <c:forEach var="employeeBean" items="${salaryList}">
             <tr>
-              <td> ${employeeBean.employeeId} </td>
+              <td> ${employeeBean.id} </td>
               <td> ${employeeBean.firstName} </td>
               <td> ${employeeBean.lastName} </td>
-              <td> ${employeeBean.state} </td>
-              <td> ${employeeBean.city} </td>
+              <td> ${employeeBean.address} </td>
               <td> ${employeeBean.dateOfBirth} </td>
               <td> ${employeeBean.phoneNo} </td>
               <td> ${employeeBean.email} </td>
               <td> ${employeeBean.qualification} </td>
-              <td> ${employeeBean.postLevel} </td>
+              <td> ${employeeBean.designation} </td>
               <td> ${employeeBean.joiningDate} </td>
-              <td> ${employeeBean.branchLocation} </td>
+              <td> ${employeeBean.branchAddress}, ${employeeBean.branchLocation} </td>
               <td> ${employeeBean.departmentName} </td>
               <td> ${employeeBean.salary} </td>
             </tr>
@@ -64,18 +62,17 @@
 
           <c:forEach var="employeeBean" items="${qualificationList}">  
             <tr>
-              <td> ${employeeBean.employeeId} </td>
+              <td> ${employeeBean.id} </td>
               <td> ${employeeBean.firstName} </td>
               <td> ${employeeBean.lastName} </td>
-              <td> ${employeeBean.state} </td>
-              <td> ${employeeBean.city} </td>
+              <td> ${employeeBean.address} </td>
               <td> ${employeeBean.dateOfBirth} </td>
               <td> ${employeeBean.phoneNo} </td>
               <td> ${employeeBean.email} </td>
               <td> ${employeeBean.qualification} </td>
-              <td> ${employeeBean.postLevel} </td>
+              <td> ${employeeBean.designation} </td>
               <td> ${employeeBean.joiningDate} </td>
-              <td> ${employeeBean.branchLocation} </td>
+              <td> ${employeeBean.branchAddress}, ${employeeBean.branchLocation} </td>
               <td> ${employeeBean.departmentName} </td>
               <td> ${employeeBean.salary} </td>
             </tr>
@@ -83,18 +80,17 @@
 
           <c:forEach var="employeeBean" items="${locationList}">  
             <tr>
-              <td> ${employeeBean.employeeId} </td>
+              <td> ${employeeBean.id} </td>
               <td> ${employeeBean.firstName} </td>
               <td> ${employeeBean.lastName} </td>
-              <td> ${employeeBean.state} </td>
-              <td> ${employeeBean.city} </td>
+              <td> ${employeeBean.address} </td>
               <td> ${employeeBean.dateOfBirth} </td>
               <td> ${employeeBean.phoneNo} </td>
               <td> ${employeeBean.email} </td>
               <td> ${employeeBean.qualification} </td>
-              <td> ${employeeBean.postLevel} </td>
+              <td> ${employeeBean.designation} </td>
               <td> ${employeeBean.joiningDate} </td>
-              <td> ${employeeBean.branchLocation} </td>
+              <td> ${employeeBean.branchAddress}, ${employeeBean.branchLocation} </td>
               <td> ${employeeBean.departmentName} </td>
               <td> ${employeeBean.salary} </td>
             </tr>
@@ -102,18 +98,17 @@
 
           <c:forEach var="employeeBean" items="${bdList}">  
             <tr>
-              <td> ${employeeBean.employeeId} </td>
+              <td> ${employeeBean.id} </td>
               <td> ${employeeBean.firstName} </td>
               <td> ${employeeBean.lastName} </td>
-              <td> ${employeeBean.state} </td>
-              <td> ${employeeBean.city} </td>
+              <td> ${employeeBean.address} </td>
               <td> ${employeeBean.dateOfBirth} </td>
               <td> ${employeeBean.phoneNo} </td>
               <td> ${employeeBean.email} </td>
               <td> ${employeeBean.qualification} </td>
-              <td> ${employeeBean.postLevel} </td>
+              <td> ${employeeBean.designation} </td>
               <td> ${employeeBean.joiningDate} </td>
-              <td> ${employeeBean.branchLocation} </td>
+              <td> ${employeeBean.branchAddress}, ${employeeBean.branchLocation} </td>
               <td> ${employeeBean.departmentName} </td>
               <td> ${employeeBean.salary} </td>
             </tr>
@@ -121,23 +116,22 @@
 
           <c:forEach var="employeeBean" items="${nameList}">  
             <tr>
-              <td> ${employeeBean.employeeId} </td>
+              <td> ${employeeBean.id} </td>
               <td> ${employeeBean.firstName} </td>
               <td> ${employeeBean.lastName} </td>
-              <td> ${employeeBean.state} </td>
-              <td> ${employeeBean.city} </td>
+              <td> ${employeeBean.address} </td>
               <td> ${employeeBean.dateOfBirth} </td>
               <td> ${employeeBean.phoneNo} </td>
               <td> ${employeeBean.email} </td>
               <td> ${employeeBean.qualification} </td>
-              <td> ${employeeBean.postLevel} </td>
+              <td> ${employeeBean.designation} </td>
               <td> ${employeeBean.joiningDate} </td>
-              <td> ${employeeBean.branchLocation} </td>
+              <td> ${employeeBean.branchAddress}, ${employeeBean.branchLocation} </td>
               <td> ${employeeBean.departmentName} </td>
               <td> ${employeeBean.salary} </td>
             </tr>
           </c:forEach>
-          
+
       </table>
     </div>
   </div>
