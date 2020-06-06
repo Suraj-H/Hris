@@ -107,13 +107,13 @@
         <servlet-name>FilterEmployeeController</servlet-name>
         <servlet-class>hris.controller.SearchControllerServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <servlet-mapping> 
         <servlet-name>FilterEmployeeController</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
 
     <!-- EmployeeProfile servlet -->
-    <servlet>
+    <servlet> 
         <servlet-name>EmployeeProfileController</servlet-name>
         <servlet-class>hris.controller.EmployeeControllerServlet</servlet-class>
     </servlet>
@@ -121,5 +121,5 @@
         <servlet-name>EmployeeProfileController</servlet-name>
         <url-pattern>/eProfile</url-pattern>
     </servlet-mapping>
-
-</web-app>
+  
+</web-app>     
