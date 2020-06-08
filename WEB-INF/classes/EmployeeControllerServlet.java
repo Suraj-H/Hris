@@ -78,12 +78,14 @@ public class EmployeeControllerServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         try {
-            Employee employee = new EmployeeDbUtil().validate(username, password);
+            Employee eLogin = new EmployeeDbUtil().validate(username, password);
 
-            if (employee == null)
+            if (eLogin == null)
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             else {
-                request.getSession().setAttribute("eLogin", employee);
+                Employee eProfile = new EmployeeDbUtil().getProfile(eLogin.getId()); 
+                request.getSession().setAttribute("eLogin", eLogin);
+                request.getSession().setAttribute("eProfile", eProfile);
                 request.getRequestDispatcher("/user.jsp").forward(request, response);
             }
         } catch (Exception e) {
