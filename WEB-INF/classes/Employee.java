@@ -27,7 +27,8 @@ public class Employee {
     }
 
     // validate constructor
-    public Employee(String username, String password) {
+    public Employee(int id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
