@@ -1,18 +1,14 @@
 package hris.controller;
 
-import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.List;
+import hris.bean.Employee;
+import hris.bean.EmployeeDbUtil;
 
 import javax.servlet.ServletException;
-import javax.servlet.SessionCookieConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import hris.bean.Employee;
-import hris.bean.EmployeeDbUtil;
+import java.io.IOException;
+import java.util.List;
 
 public class EmployeeControllerServlet extends HttpServlet {
 
@@ -29,44 +25,16 @@ public class EmployeeControllerServlet extends HttpServlet {
                 command = "LIST";
 
             switch (command) {
-                case "LIST":
-                    listEmployees(request, response);
-                    break;
-
-                case "LOGIN":
-                    login(request, response);
-                    break;
-
-                case "LOGOUT":
-                    logout(request, response);
-                    break;
-
-                case "ADD":
-                    addEmployee(request, response);
-                    break;
-
-                case "LOAD":
-                    loadEmployee(request, response);
-                    break;
-
-                case "UPDATE":
-                    updateEmployee(request, response);
-                    break;
-
-                case "DELETE":
-                    deleteEmployee(request, response);
-                    break;
-
-                case "PROFILE":
-                    employeeProfile(request, response);
-                    break;
-
-                case "EDIT_PROFILE":
-                    updateProfile(request, response);
-                    break;
-
-                default:
-                    listEmployees(request, response);
+                case "LIST" -> listEmployees(request, response);
+                case "LOGIN" -> login(request, response);
+                case "LOGOUT" -> logout(request, response);
+                case "ADD" -> addEmployee(request, response);
+                case "LOAD" -> loadEmployee(request, response);
+                case "UPDATE" -> updateEmployee(request, response);
+                case "DELETE" -> deleteEmployee(request, response);
+                case "PROFILE" -> employeeProfile(request, response);
+                case "EDIT_PROFILE" -> updateProfile(request, response);
+                default -> listEmployees(request, response);
             }
 
         } catch (Exception e) {
@@ -77,18 +45,15 @@ public class EmployeeControllerServlet extends HttpServlet {
     private void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        try {
-            Employee eLogin = new EmployeeDbUtil().validate(username, password);
+        Employee eLogin = new EmployeeDbUtil().validate(username, password);
 
-            if (eLogin == null)
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
-            else {
-                Employee eProfile = new EmployeeDbUtil().getProfile(eLogin.getId()); 
-                request.getSession().setAttribute("eLogin", eLogin);
-                request.getSession().setAttribute("eProfile", eProfile);
-                request.getRequestDispatcher("/user.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
+        if (eLogin == null)
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        else {
+            Employee eProfile = new EmployeeDbUtil().getProfile(eLogin.getId());
+            request.getSession().setAttribute("eLogin", eLogin);
+            request.getSession().setAttribute("eProfile", eProfile);
+            request.getRequestDispatcher("/user.jsp").forward(request, response);
         }
     }
 
@@ -98,7 +63,6 @@ public class EmployeeControllerServlet extends HttpServlet {
     }
 
     private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         int id = Integer.parseInt(request.getParameter("id"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -121,7 +85,6 @@ public class EmployeeControllerServlet extends HttpServlet {
     }
 
     private void loadEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         int id = Integer.parseInt(request.getParameter("id"));
         Employee employee = new EmployeeDbUtil().getEmployee(id);
         request.setAttribute("eBean", employee);
@@ -129,22 +92,18 @@ public class EmployeeControllerServlet extends HttpServlet {
     }
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         int id = Integer.parseInt(request.getParameter("id"));
         new EmployeeDbUtil().deleteEmployee(id);
         listEmployees(request, response);
     }
 
     private void listEmployees(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         List<Employee> employees = new EmployeeDbUtil().getEmployees();
         request.setAttribute("employeeList", employees);
-
         request.getRequestDispatcher("/listEmployees.jsp").forward(request, response);
     }
-    
-    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int id = Integer.parseInt(request.getParameter("id"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -162,17 +121,15 @@ public class EmployeeControllerServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         Employee employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email, qualification,
-        designation, joiningDate, departmentId, branchId, salary, username, password);
+                designation, joiningDate, departmentId, branchId, salary, username, password);
 
         new EmployeeDbUtil().addEmployee(employee);
-
         listEmployees(request, response);
     }
-    
+
     private void employeeProfile(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Employee eLogin = (Employee) request.getSession().getAttribute("eLogin");
         Employee eProfile = new EmployeeDbUtil().getProfile(eLogin.getId());
-        
         request.getSession().setAttribute("eProfile", eProfile);
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
     }
@@ -202,4 +159,5 @@ public class EmployeeControllerServlet extends HttpServlet {
         new EmployeeDbUtil().updateEmployee(employee);
         employeeProfile(request, response);
     }
+
 }
