@@ -18,31 +18,18 @@ public class SearchControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
             String command = request.getParameter("command");
 
             switch (command) {
-                case "A":
-                    listSalary(request, response);
-                    break;
-
-                case "Q":
-                    listQPL(request, response);
-                    break;
-
-                case "B":
-                    listBD(request, response);
-                    break;
-
-                case "N":
-                    listName(request, response);
-                    break;
+                case "A" -> listSalary(request, response);
+                case "Q" -> listQPL(request, response);
+                case "B" -> listBD(request, response);
+                case "N" -> listName(request, response);
             }
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
-
     }
 
     private void listSalary(HttpServletRequest request, HttpServletResponse response) throws Exception {
