@@ -1,9 +1,6 @@
 package hris.bean;
 
-import java.util.Map;
-
 public class Employee {
-    private Map<String, String> searchObj;
     private int id;
     private String firstName;
     private String lastName;
@@ -60,8 +57,8 @@ public class Employee {
 
     // update employee constructor
     public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
-            String email, String qualification, String designation, String joiningDate, int branchId, 
-            int departmentId, double salary) {
+            String email, String qualification, String designation, String joiningDate, int branchId, int departmentId,
+            double salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -114,6 +111,27 @@ public class Employee {
         this.joiningDate = joiningDate;
         this.branchAddress = branchAddress;
         this.branchLocation = branchLocation;
+        this.departmentName = departmentName;
+        this.salary = salary;
+    }
+
+    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
+            String email, String qualification, String designation, String joiningDate, int branchId,
+            String branchAddress, String branchLocation, int departmentId, String departmentName, double salary) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.qualification = qualification;
+        this.designation = designation;
+        this.joiningDate = joiningDate;
+        this.branchId = branchId;
+        this.branchAddress = branchAddress;
+        this.branchLocation = branchLocation;
+        this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.salary = salary;
     }
@@ -262,14 +280,6 @@ public class Employee {
         this.password = password;
     }
 
-    public Map<String, String> getSearchObj() {
-        return searchObj;
-    }
-
-    public void setSearchObj(Map<String, String> searchObj) {
-        this.searchObj = searchObj;
-    }
-
     @Override
     public String toString() {
         return "Employee [address=" + address + ", branchId=" + branchId + ", branchLocation=" + branchLocation
@@ -296,36 +306,11 @@ public class Employee {
         if (getClass() != obj.getClass())
             return false;
         Employee other = (Employee) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id == other.id;
     }
 
     public static String formatString(String str) {
         return (str.substring(0, 1).toUpperCase()).concat(str.substring(1).toLowerCase());
     }
-
-    public Employee(int id, String firstName, String lastName, String address, String dateOfBirth, long phoneNo,
-            String email, String qualification, String designation, String joiningDate, int branchId,
-            String branchAddress, String branchLocation, int departmentId, String departmentName, double salary) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNo = phoneNo;
-        this.email = email;
-        this.qualification = qualification;
-        this.designation = designation;
-        this.joiningDate = joiningDate;
-        this.branchId = branchId;
-        this.branchAddress = branchAddress;
-        this.branchLocation = branchLocation;
-        this.departmentId = departmentId;
-        this.departmentName = departmentName;
-        this.salary = salary;
-    }
-
-    
 
 }
