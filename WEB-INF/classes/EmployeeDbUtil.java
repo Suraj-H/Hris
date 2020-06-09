@@ -4,20 +4,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDbUtil {
-    private List<Employee> employees;
     private static Connection con;
-    private String qString = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id";
+    private final String qString = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e "
+            + "INNER JOIN branch_info b ON b.b_id = e.branch_id "
+            + "INNER JOIN department_info d ON d.d_id = e.department_id";
 
     public static Connection gConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hris_db", "root", "surajh");
-        } catch (Exception igonred) {
+        } catch (Exception ignored) {
         }
 
         return con;
@@ -29,7 +29,7 @@ public class EmployeeDbUtil {
         PreparedStatement ps = null;
         String query = "SELECT id, username, password FROM auth_info a INNER JOIN employees e ON e.id = a.employee_id WHERE username=? AND password=?";
         ResultSet rs = null;
-        Employee employee = null;
+        Employee employee;
 
         try {
             con = gConnection();
@@ -49,9 +49,12 @@ public class EmployeeDbUtil {
             }
 
         } finally {
-            rs.close();
-            ps.close();
-            con.close();
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
 
         return null;
@@ -59,14 +62,17 @@ public class EmployeeDbUtil {
 
     public Employee getProfile(int id) throws Exception {
 
-        Employee employee = null;
+        Employee employee;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             con = gConnection();
-            String query = "SELECT first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, branch_id, b_address, location, department_id, name, salary employees INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id WHERE id=?";
+            String query = "SELECT first_name, last_name, address, date_of_birth, phone_no, email, qualification, "
+                    + "designation, joining_date, branch_id, b_address, location, department_id, name, salary "
+                    + "FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id "
+                    + "INNER JOIN department_info d ON d.d_id = e.department_id WHERE id=?";
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -95,16 +101,19 @@ public class EmployeeDbUtil {
                 return employee;
             }
         } finally {
-            rs.close();
-            ps.close();
-            con.close();
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
-        
+
         return null;
     }
 
     public List<Employee> getEmployees() throws Exception {
-        employees = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -136,15 +145,13 @@ public class EmployeeDbUtil {
                 employees.add(employee);
             }
 
-        } catch (Exception ignored) {
-
         } finally {
-            try {
+            if (rs != null)
                 rs.close();
+            if (ps != null)
                 ps.close();
+            if (con != null)
                 con.close();
-            } catch (Exception e) {
-            }
         }
 
         return employees;
@@ -152,14 +159,15 @@ public class EmployeeDbUtil {
 
     public Employee getEmployee(int id) throws Exception {
 
-        Employee employee = null;
+        Employee employee;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             con = gConnection();
-            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, department_id, branch_id, salary FROM employees WHERE id = ?";
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, department_id, branch_id, salary "
+                    + "FROM employees WHERE id = ?";
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -180,14 +188,16 @@ public class EmployeeDbUtil {
 
                 employee = new Employee(id, firstName, lastName, address, dateOfBirth, phoneNo, email, qualification,
                         designation, joiningDate, branchId, departmentId, salary);
-            } else {
+            } else
                 throw new Exception("Could not find employee with id: " + id);
-            }
 
         } finally {
-            rs.close();
-            ps.close();
-            con.close();
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
 
         return employee;
@@ -199,7 +209,8 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "UPDATE employees SET first_name=?, last_name=?, address=?, date_of_birth=?, phone_no=?, email=?, qualification=?, designation=?, joining_date=?, department_id=?, branch_id=?, salary=? WHERE id=?";
+            String query = "UPDATE employees SET first_name=?, last_name=?, address=?, date_of_birth=?, "
+                    + "phone_no=?, email=?, qualification=?, designation=?, joining_date=?, department_id=?, branch_id=?, salary=? WHERE id=?";
 
             ps = con.prepareStatement(query);
             ps.setString(1, employee.getFirstName());
@@ -218,8 +229,10 @@ public class EmployeeDbUtil {
             ps.execute();
 
         } finally {
-            ps.close();
-            con.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
     }
 
@@ -229,7 +242,8 @@ public class EmployeeDbUtil {
 
         try {
             con = EmployeeDbUtil.gConnection();
-            String query = "INSERT INTO employees (id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, department_id, branch_id, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO employees (id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, department_id, branch_id, salary) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(query);
             ps.setInt(1, employee.getId());
             ps.setString(2, employee.getFirstName());
@@ -246,20 +260,24 @@ public class EmployeeDbUtil {
             ps.setDouble(13, employee.getSalary());
             ps.executeUpdate();
 
-            String lString = "INSERT INTO auth_info (employee_id, username, password, access_level) VALUES (?, ?, ?, ?)";
+            String lString = "INSERT INTO auth_info (employee_id, username, password, access_level) "
+                    + "VALUES (?, ?, ?, ?)";
             ps = con.prepareStatement(lString);
             ps.setInt(1, employee.getId());
             ps.setString(2, employee.getUsername());
             ps.setString(3, employee.getPassword());
-            if (employee.getDesignation().equals("Admin")) {
+
+            if (employee.getDesignation().equals("Admin"))
                 ps.setString(4, "Admin");
-            } else {
+            else
                 ps.setString(4, "Employee");
-            }
+
             ps.executeUpdate();
         } finally {
-            ps.close();
-            con.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
     }
 
@@ -274,13 +292,14 @@ public class EmployeeDbUtil {
             ps.setInt(1, id);
             ps.execute();
         } finally {
-            ps.close();
-            con.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
     }
 
     /* search filter */
-
     public List<Employee> getQPL(String qual, String pL) throws Exception {
 
         List<Employee> es = new ArrayList<>();
@@ -292,24 +311,22 @@ public class EmployeeDbUtil {
             con = gConnection();
             String query = qString;
 
-            if (qual.length() != 0 && pL.length() != 0) {
+            if (qual.length() != 0 && pL.length() != 0)
                 query = qString + " WHERE qualification=? AND designation=?";
-            } else if (qual.length() != 0 && pL.length() == 0) {
+            else if (qual.length() != 0)
                 query = qString + " WHERE qualification=?";
-            } else if (qual.length() == 0 && pL.length() != 0) {
+            else if (pL.length() != 0)
                 query = qString + " WHERE designation=?";
-            }
 
             ps = con.prepareStatement(query);
 
             if (qual.length() != 0 && pL.length() != 0) {
                 ps.setString(1, qual);
                 ps.setString(2, pL);
-            } else if (qual.length() != 0 && pL.length() == 0) {
+            } else if (qual.length() != 0)
                 ps.setString(1, qual);
-            } else if (qual.length() == 0 && pL.length() != 0) {
+            else if (pL.length() != 0)
                 ps.setString(1, pL);
-            }
 
             rs = ps.executeQuery();
 
@@ -335,7 +352,13 @@ public class EmployeeDbUtil {
                 es.add(employee);
             }
 
-        } catch (Exception e) {
+        } finally {
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
 
         return es;
@@ -350,31 +373,32 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id";
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, "
+                    + "email, qualification, designation, joining_date, b_address, location, name, salary "
+                    + "FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id "
+                    + "INNER JOIN department_info d ON d.d_id = e.department_id";
 
             if (rBranchId.length() != 0) {
                 query = query + " WHERE branch_id = ?";
                 ps = con.prepareStatement(query);
                 ps.setInt(1, Integer.parseInt(rBranchId));
             } else {
-                if (rBranchLocation.length() != 0 && rDepartmentName.length() != 0) {
+                if (rBranchLocation.length() != 0 && rDepartmentName.length() != 0)
                     query = qString + " WHERE location=? AND name=?";
-                } else if (rBranchLocation.length() != 0 && rDepartmentName.length() == 0) {
+                else if (rBranchLocation.length() != 0)
                     query = qString + " WHERE location=?";
-                } else if (rBranchLocation.length() == 0 && rDepartmentName.length() != 0) {
+                else if (rDepartmentName.length() != 0)
                     query = qString + " WHERE name=?";
-                }
 
                 ps = con.prepareStatement(query);
 
                 if (rBranchLocation.length() != 0 && rDepartmentName.length() != 0) {
                     ps.setString(1, rBranchLocation);
                     ps.setString(2, rDepartmentName);
-                } else if (rBranchLocation.length() != 0 && rDepartmentName.length() == 0) {
+                } else if (rBranchLocation.length() != 0)
                     ps.setString(1, rBranchLocation);
-                } else if (rBranchLocation.length() == 0 && rDepartmentName.length() != 0) {
+                else if (rDepartmentName.length() != 0)
                     ps.setString(1, rDepartmentName);
-                }
             }
 
             rs = ps.executeQuery();
@@ -401,7 +425,13 @@ public class EmployeeDbUtil {
                 es.add(employee);
             }
 
-        } catch (Exception e) {
+        } finally {
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
 
         return es;
@@ -416,18 +446,19 @@ public class EmployeeDbUtil {
 
         try {
             con = gConnection();
-            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id";
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e "
+                    + "INNER JOIN branch_info b ON b.b_id = e.branch_id "
+                    + "INNER JOIN department_info d ON d.d_id = e.department_id";
 
             if (rId.length() != 0) {
                 query = query + " WHERE id=?";
             } else {
-                if (rFirstName.length() != 0 && rLastName.length() != 0) {
+                if (rFirstName.length() != 0 && rLastName.length() != 0)
                     query = qString + " WHERE first_name=? AND last_name=?";
-                } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
+                else if (rFirstName.length() != 0)
                     query = qString + " WHERE first_name=?";
-                } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
+                else if (rLastName.length() != 0)
                     query = qString + " WHERE last_name=?";
-                }
             }
 
             ps = con.prepareStatement(query);
@@ -438,11 +469,10 @@ public class EmployeeDbUtil {
                 if (rFirstName.length() != 0 && rLastName.length() != 0) {
                     ps.setString(1, rFirstName);
                     ps.setString(2, rLastName);
-                } else if (rFirstName.length() != 0 && rLastName.length() == 0) {
+                } else if (rFirstName.length() != 0)
                     ps.setString(1, rFirstName);
-                } else if (rFirstName.length() == 0 && rLastName.length() != 0) {
+                else if (rLastName.length() != 0)
                     ps.setString(1, rLastName);
-                }
             }
 
             rs = ps.executeQuery();
@@ -469,7 +499,13 @@ public class EmployeeDbUtil {
                 es.add(employee);
             }
 
-        } catch (Exception e) {
+        } finally {
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
 
         return es;
@@ -485,7 +521,10 @@ public class EmployeeDbUtil {
         try {
             con = gConnection();
             // String query = qString + " WHERE salary < ? AND salary > ? ORDER BY salary";
-            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e INNER JOIN branch_info b ON b.b_id = e.branch_id INNER JOIN department_info d ON d.d_id = e.department_id WHERE salary < ? AND salary > ? ORDER BY salary";
+            String query = "SELECT id, first_name, last_name, address, date_of_birth, phone_no, email, qualification, designation, joining_date, b_address, location, name, salary FROM employees e "
+                    + "INNER JOIN branch_info b ON b.b_id = e.branch_id "
+                    + "INNER JOIN department_info d ON d.d_id = e.department_id "
+                    + "WHERE salary < ? AND salary > ? ORDER BY salary";
 
             // if (value.equals("A")) {
             // query = query + " ASC";
@@ -521,11 +560,16 @@ public class EmployeeDbUtil {
 
             }
 
-        } catch (Exception e) {
+        } finally {
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+            if (con != null)
+                con.close();
         }
 
         return es;
-
     }
 
 }
